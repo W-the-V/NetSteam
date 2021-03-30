@@ -32,12 +32,16 @@ function Navigation({ isLoaded }) {
             <img className="logoText" src={src} alt="Logo"></img>
           </button>
         </NavLink>
-        <button className="menuButton" onClick={logout}>
-          Log Out
-        </button>
-        <button className="menuButton" onClick={login}>
-          Login
-        </button>
+        {sessionUser && (
+          <button className="navButton" onClick={logout}>
+            Log Out
+          </button>
+        )}
+        {!sessionUser && (
+          <button className="navButton" onClick={login}>
+            Login
+          </button>
+        )}
         {/* <button className="menuButton" onClick={handleSubmit}>
           Demo
         </button> */}

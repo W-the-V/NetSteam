@@ -18,14 +18,23 @@ function Splash() {
   return (
     <div className="splashShell">
       <SignUpModal email={email} setEmail={setEmail} />
-      <input
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <button className="menuButton" onClick={signup}>
-        Sign Up
-      </button>
+      <div className="splashTitleShell">
+        <p className="splashTitle">
+          Video game trailers, information, discussion, and more.
+        </p>
+        <div className="splashInputShell">
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="splashInput"
+            placeholder="Email address"
+          ></input>
+          <button className="splashButton" onClick={signup}>
+            Get Started
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,9 @@ body {
   box-sizing: border-box;
   outline: none;
 }
+#root {
+  box-sizing: border-box;
+}
 .defaultInner {
   display: flex;
   flex-direction: column;
@@ -109,7 +112,7 @@ body {
   color: rgb(255, 255, 255);
   padding: 10px;
   font-size: 20px;
-  border-radius: 12px;
+  border-radius: 4px;
   margin-top: 15px;
   cursor: pointer;
   outline: none;
