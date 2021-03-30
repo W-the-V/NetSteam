@@ -1,3 +1,53 @@
-.profile-dropdown {
-  position: absolute;
+.navBar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 760px;
+  justify-content: space-between;
+  position: fixed;
+  height: 80px;
+  background-color: #171a21;
+  top: 0;
+  left: 0;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;
+  z-index: 3;
+}
+.homeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #171a21;
+  border: none;
+  color: rgb(34, 34, 34);
+  text-decoration: none;
+  border-radius: 30px;
+  outline: none;
+  width: 140px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  transition: box-shadow 0.4s;
+}
+.homeButton:hover {
+  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+}
+.logoText {
+  height: 40px;
+  width: 120px;
+  padding: 0;
+  margin: 0;
+}
+
+.homeLink {
+  width: 130px;
+  height: 60px;
+  margin-left: 50px;
+}
+.navOuterShell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

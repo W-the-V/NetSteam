@@ -1,1 +1,120 @@
-/* TODO Add site wide styles */
+body {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif;
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+}
+.defaultInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2a475e;
+  height: fit-content;
+  max-width: 568px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.28) 0px 8px 28px;
+  outline: none;
+  color: #c7d5e0;
+}
+.defaultOuter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  outline: none;
+}
+.ReactModal__Content {
+  opacity: 0;
+  transform: translateY(400px);
+  transition: all 400ms ease-in-out;
+  outline: none;
+}
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transform: translateY(0px);
+  outline: none;
+}
+.LoginShell {
+  height: 100%;
+  width: 100%;
+}
+.LoginForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  padding: 20px;
+  padding-top: 0px;
+  outline: none;
+}
+.formInput {
+  color: #c7d5e0;
+  background-color: #171a21;
+  display: flex;
+  cursor: text;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  border: none;
+  z-index: 1;
+  margin-top: 5px;
+  height: 30px;
+  outline: none;
+  text-decoration: none;
+}
+.inputBox {
+  color: #c7d5e0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 18px;
+  width: 100%;
+  margin: 5px;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.formTitle {
+  background: #171a21;
+  color: #c7d5e0;
+  text-align: center;
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.modalButton {
+  box-sizing: border-box;
+  width: 100%;
+  text-decoration: none;
+  border: none;
+  background-color: #66c0f4;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.3s;
+}
+.modalButton:hover {
+  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+}
