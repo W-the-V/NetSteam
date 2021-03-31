@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
-import { deactivateSignUp } from "../../store/Modals";
+import {
+  deactivateSignUp,
+  deactivateLogin,
+  activateLogin,
+} from "../../store/Modals";
 import * as sessionActions from "../../store/session";
 
 Modal.setAppElement(document.getElementById("root"));
@@ -10,6 +14,7 @@ Modal.setAppElement(document.getElementById("root"));
 function SignUpModal({ email, setEmail }) {
   const dispatch = useDispatch();
   const signUpState = useSelector((state) => state.modal.signup);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,24 +22,45 @@ function SignUpModal({ email, setEmail }) {
   const onclick = () => {
     dispatch(deactivateSignUp());
   };
-  const handleSubmit = (e) => {
+  const demoLogin = () => {
+    dispatch(
+      sessionActions.login({
+        credential: "demo@demo.com",
+        password: "password",
+      })
+    );
+    dispatch(deactivateSignUp());
+    dispatch(deactivateLogin());
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    let toReturn;
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(
+      toReturn = await dispatch(
         sessionActions.signup({
           email,
           username,
           password,
         })
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+      ).catch((res) => {
+        if (res.data && res.data.errors) {
+          if (res.data.errors == "email must be unique") {
+            setErrors(["Email already exists"]);
+          } else setErrors(res.data.errors);
+        }
       });
+    } else setErrors(["Passwords must match"]);
+    if (toReturn) {
+      dispatch(deactivateLogin());
+      dispatch(deactivateSignUp());
     }
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
+
+    return toReturn;
+  };
+  const changeForm = () => {
+    dispatch(deactivateSignUp());
+    dispatch(activateLogin());
   };
 
   return (
@@ -49,12 +75,14 @@ function SignUpModal({ email, setEmail }) {
         >
           <div className="LoginShell">
             <div className="formTitle">
-              <h1>Sign up</h1>
+              <h1>Sign Up</h1>
             </div>
             <form className="LoginForm" onSubmit={handleSubmit}>
               <ul>
                 {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <p className="modalErrors" key={idx}>
+                    {error}
+                  </p>
                 ))}
               </ul>
               <div className="inputBox">
@@ -100,6 +128,14 @@ function SignUpModal({ email, setEmail }) {
               <button className="modalButton" type="submit">
                 Sign Up
               </button>
+              <div className="modalFooter">
+                <p className="modalFooterText" onClick={changeForm}>
+                  Already have an account? Login
+                </p>
+                <p className="modalFooterText" onClick={demoLogin}>
+                  Login as Demo User
+                </p>
+              </div>
             </form>
           </div>
         </Modal>

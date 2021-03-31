@@ -21,7 +21,7 @@
   text-align: center;
   height: 140px;
   width: 60%;
-  margin-top: -200px;
+  margin-top: -150px;
 }
 .splashTitle {
   align-self: center;
@@ -34,7 +34,7 @@
   align-items: center;
 }
 .splashInput {
-  height: 45px;
+  height: 45.3px;
   width: 450px;
   font-size: 24px;
   outline: none;

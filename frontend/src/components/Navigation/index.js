@@ -24,6 +24,16 @@ function Navigation({ isLoaded }) {
     dispatch(deactivateSignUp());
     dispatch(activateLogin());
   };
+  const demoLogin = () => {
+    dispatch(
+      sessionActions.login({
+        credential: "demo@demo.com",
+        password: "password",
+      })
+    );
+    dispatch(deactivateSignUp());
+    dispatch(deactivateLogin());
+  };
   return (
     <div className="navOuterShell">
       <div className="navBar">
@@ -33,18 +43,25 @@ function Navigation({ isLoaded }) {
           </button>
         </NavLink>
         {sessionUser && (
-          <button className="navButton" onClick={logout}>
-            Log Out
-          </button>
+          <div className="rightNavShell">
+            <div className="userNameShell">
+              <div className="navUserName">{sessionUser.email}</div>
+            </div>
+            <button className="navButton" onClick={logout}>
+              Log Out
+            </button>
+          </div>
         )}
         {!sessionUser && (
-          <button className="navButton" onClick={login}>
-            Login
-          </button>
+          <div className="rightNavShell">
+            <button className="navButton" onClick={login}>
+              Login
+            </button>
+            <button className="navButton" onClick={demoLogin}>
+              Demo
+            </button>
+          </div>
         )}
-        {/* <button className="menuButton" onClick={handleSubmit}>
-          Demo
-        </button> */}
       </div>
     </div>
   );

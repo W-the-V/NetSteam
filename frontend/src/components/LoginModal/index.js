@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { deactivateLogin } from "../../store/Modals";
+import {
+  activateSignUp,
+  deactivateLogin,
+  deactivateSignUp,
+} from "../../store/Modals";
 import * as sessionActions from "../../store/session";
 
 Modal.setAppElement(document.getElementById("root"));
@@ -9,23 +13,42 @@ Modal.setAppElement(document.getElementById("root"));
 const LoginModal = () => {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.modal.login);
+  const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
+    let toReturn = await dispatch(
+      sessionActions.login({ credential, password })
+    ).catch(async (res) => {
+      if (res.data && res.data.errors) setErrors(res.data.errors);
+    });
+    if (toReturn) {
+      dispatch(deactivateLogin());
+      dispatch(deactivateSignUp());
+    }
+    return toReturn;
+  };
+  const demoLogin = () => {
+    dispatch(
+      sessionActions.login({
+        credential: "demo@demo.com",
+        password: "password",
+      })
     );
+    dispatch(deactivateSignUp());
+    dispatch(deactivateLogin());
   };
 
   const onclick = () => {
     dispatch(deactivateLogin());
+  };
+  const changeForm = () => {
+    dispatch(deactivateLogin());
+    dispatch(activateSignUp());
   };
 
   return (
@@ -39,12 +62,14 @@ const LoginModal = () => {
       >
         <div className="LoginShell">
           <div className="formTitle">
-            <h1>Log In</h1>
+            <h1>Login</h1>
           </div>
           <form className="LoginForm" onSubmit={handleSubmit}>
             <ul>
               {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+                <p className="modalErrors" key={idx}>
+                  {error}
+                </p>
               ))}
             </ul>
             <div className="inputBox">
@@ -68,8 +93,16 @@ const LoginModal = () => {
               />
             </div>
             <button className="modalButton" type="submit">
-              Log In
+              Login
             </button>
+            <div className="modalFooter">
+              <p className="modalFooterText" onClick={changeForm}>
+                Don't have an account yet? Sign Up
+              </p>
+              <p className="modalFooterText" onClick={demoLogin}>
+                Login as Demo User
+              </p>
+            </div>
           </form>
         </div>
       </Modal>

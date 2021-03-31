@@ -63,6 +63,16 @@ body {
   padding-top: 0px;
   outline: none;
 }
+.modalFooterText {
+  cursor: pointer;
+  width: fit-content;
+}
+.modalFooterText:hover {
+  text-decoration: underline;
+}
+.modalErrors {
+  margin: 0;
+}
 .formInput {
   color: #c7d5e0;
   background-color: #171a21;
