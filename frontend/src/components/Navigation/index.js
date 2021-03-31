@@ -1,34 +1,69 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
-import './Navigation.css';
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+import "./Navigation.css";
+import src from "../../images/logotext.png";
+import {
+  activateLogin,
+  deactivateLogin,
+  activateSignUp,
+  deactivateSignUp,
+} from "../../store/Modals";
+import * as sessionActions from "../../store/session";
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <ProfileButton user={sessionUser} />
+function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(deactivateLogin());
+    dispatch(deactivateSignUp());
+    dispatch(sessionActions.logout());
+  };
+  const login = () => {
+    dispatch(deactivateSignUp());
+    dispatch(activateLogin());
+  };
+  const demoLogin = () => {
+    dispatch(
+      sessionActions.login({
+        credential: "demo@demo.com",
+        password: "password",
+      })
     );
-  } else {
-    sessionLinks = (
-      <>
-        <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
-    );
-  }
-
+    dispatch(deactivateSignUp());
+    dispatch(deactivateLogin());
+  };
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <div className="navOuterShell">
+      <div className="navBar">
+        <NavLink exact to="/" className="homeLink">
+          <button className="homeButton">
+            <img className="logoText" src={src} alt="Logo"></img>
+          </button>
+        </NavLink>
+        {sessionUser && (
+          <div className="rightNavShell">
+            <div className="userNameShell">
+              <div className="navUserName">{sessionUser.email}</div>
+            </div>
+            <button className="navButton" onClick={logout}>
+              Log Out
+            </button>
+          </div>
+        )}
+        {!sessionUser && (
+          <div className="rightNavShell">
+            <button className="navButton" onClick={login}>
+              Login
+            </button>
+            <button className="navButton" onClick={demoLogin}>
+              Demo
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

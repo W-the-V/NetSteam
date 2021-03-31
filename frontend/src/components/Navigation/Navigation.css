@@ -1,3 +1,78 @@
-.profile-dropdown {
-  position: absolute;
+.navBar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 760px;
+  justify-content: space-between;
+  position: fixed;
+  height: 80px;
+  background-color: #171a21;
+  top: 0;
+  left: 0;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px;
+  z-index: 3;
+}
+.homeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #171a21;
+  border: none;
+  color: rgb(34, 34, 34);
+  text-decoration: none;
+  border-radius: 30px;
+  outline: none;
+  width: 200px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  transition: box-shadow 0.4s;
+}
+.homeButton:hover {
+  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+}
+.logoText {
+  height: 45px;
+  width: 170px;
+  padding: 0;
+  margin: 0;
+}
+
+.homeLink {
+  width: 170px;
+  height: 60px;
+  margin-left: 50px;
+}
+.navOuterShell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navButton {
+  margin-right: 50px;
+  height: 34px;
+  width: 95px;
+  font-size: 20px;
+  background: #66c0f4;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  transition: box-shadow 0.3s;
+}
+.navButton:hover {
+  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+}
+.rightNavShell {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navUserName {
+  margin-right: 20px;
 }
