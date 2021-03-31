@@ -8,12 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: "Users" },
-      },
-      embedCode: {
+      embedURL: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
@@ -25,14 +20,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      rating: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
       genreId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Genres" },
+      },
+      imageUrl: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      developer: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      publisher: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

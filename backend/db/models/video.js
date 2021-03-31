@@ -3,17 +3,19 @@ module.exports = (sequelize, DataTypes) => {
   const Video = sequelize.define(
     "Video",
     {
-      userId: DataTypes.INTEGER,
-      embedCode: DataTypes.TEXT,
+      embedURL: DataTypes.TEXT,
       title: DataTypes.STRING,
       about: DataTypes.TEXT,
-      rating: DataTypes.INTEGER,
       genreId: DataTypes.INTEGER,
+      imageURL: DataTypes.TEXT,
+      developer: DataTypes.STRING,
+      publisher: DataTypes.STRING,
     },
     {}
   );
   Video.associate = function (models) {
     Video.hasMany(models.UserList, { foreignKey: "videoId" });
+    Video.hasMany(models.Review, { foreignKey: "videoId" });
   };
   return Video;
 };

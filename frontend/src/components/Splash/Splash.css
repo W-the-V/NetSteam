@@ -34,13 +34,14 @@
   align-items: center;
 }
 .splashInput {
-  height: 45.3px;
+  height: 89.9%;
   width: 450px;
   font-size: 24px;
   outline: none;
+  border: none;
 }
 .splashButton {
-  height: 50px;
+  height: 100%;
   width: 160px;
   font-size: 20px;
   background: #66c0f4;
@@ -57,4 +58,12 @@
 }
 .splashButton:hover {
   box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+}
+.splashInputInner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  background-color: white;
 }
