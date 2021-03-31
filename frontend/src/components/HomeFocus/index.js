@@ -8,12 +8,11 @@ function HomeFocus() {
   if (!sessionUser) {
     return <Redirect to="/" />;
   }
-  let src = "../images/header.jpg";
+  let src = "https://netsteambucket.s3.amazonaws.com/header.jpg";
   return (
     <div className="homeFocusShell">
       <div className="focusTitleBox">
         <div className="focusTitle">Lofi</div>
-        <button className="focusTitleButton">Comments</button>
       </div>
       <div className="focusInnerShell">
         <div className="videoOuterShell">
@@ -28,25 +27,30 @@ function HomeFocus() {
         </div>
         <div className="focusAboutShell">
           <img className="gameImg" src={src}></img>
-          <div className="aboutVideoText"></div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
-          <div>HELLO</div>
+          <div className="aboutVideoText">
+            A brutal exploration and survival game for 1-10 players, set in a
+            procedurally-generated purgatory inspired by viking culture. Battle,
+            build, and conquer your way to a saga worthy of Odin’s patronage!
+          </div>
+          <div className="reviewOuterShell">
+            <div className="reviewTitleBox">
+              <div className="reviewTitles">All Reviews:</div>
+              <div className="reviewTitles">Release Date:</div>
+              <div className="reviewTitles">Developer:</div>
+              <div className="reviewTitles">Publisher:</div>
+              <div className="reviewTitles reviewGenre">Genre:</div>
+            </div>
+            <div className="reviewDataBox">
+              <div className="reviewData">Overwhelmingly Positive (70,448)</div>
+              <div className="reviewData">Feb 2, 2021</div>
+              <div className="reviewData">Iron Gate AB</div>
+              <div className="reviewData">Coffee Stain Publishing</div>
+              <button className="genreButton">Survival</button>
+            </div>
+          </div>
+          <div className="focusButtonShell">
+            <button className="focusTitleButton">Show More</button>
+          </div>
         </div>
       </div>
     </div>

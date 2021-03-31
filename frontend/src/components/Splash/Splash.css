@@ -44,12 +44,11 @@
   height: 100%;
   width: 160px;
   font-size: 20px;
-  background: #66c0f4;
+  background-color: #2a475e;
+  color: #66c0f4;
   border: none;
   outline: none;
   cursor: pointer;
-  color: rgb(255, 255, 255);
-  transition: box-shadow 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +56,8 @@
   margin-left: -1px;
 }
 .splashButton:hover {
-  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+  background-color: #66c0f4;
+  color: white;
 }
 .splashInputInner {
   width: 100%;

@@ -56,16 +56,16 @@
   height: 34px;
   width: 95px;
   font-size: 20px;
-  background: #66c0f4;
+  background-color: #2a475e;
+  color: #66c0f4;
   border: none;
   outline: none;
   cursor: pointer;
-  color: rgb(255, 255, 255);
   border-radius: 4px;
-  transition: box-shadow 0.3s;
 }
 .navButton:hover {
-  box-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+  background-color: #66c0f4;
+  color: white;
 }
 .rightNavShell {
   height: 100%;
