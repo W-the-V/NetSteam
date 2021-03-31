@@ -13,7 +13,6 @@ Modal.setAppElement(document.getElementById("root"));
 const LoginModal = () => {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.modal.login);
-  const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);

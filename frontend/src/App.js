@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LoginModal from "./components/LoginModal";
 import Splash from "./components/Splash";
+import Home from "./components/Home";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,8 +19,11 @@ function App() {
       <LoginModal />
       {isLoaded && (
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Splash />
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
         </Switch>
       )}

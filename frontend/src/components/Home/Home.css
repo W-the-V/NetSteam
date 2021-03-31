@@ -1,0 +1,11 @@
+.homeOuterShell {
+  background-color: #1b2838;
+  height: 100vw;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
