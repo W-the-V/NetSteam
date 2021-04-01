@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Genres" },
       },
-      imageUrl: {
+      imageURL: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
