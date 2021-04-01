@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import modalReducer from "./Modals";
 import menuReducer from "./showMenu";
+import videosReducer from "./videos";
 
 const rootReducer = combineReducers({
   session,
   modal: modalReducer,
   menu: menuReducer,
+  videos: videoReducer,
 });
 
 let enhancer;
