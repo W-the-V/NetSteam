@@ -17,6 +17,7 @@ function HomeFocus() {
       <div className="focusInnerShell">
         <div className="videoOuterShell">
           <iframe
+            className="focusVideo"
             width="100%"
             height="100%"
             src="https://www.youtube.com/embed/5qap5aO4i9A?rel=0&modestbranding=1"
@@ -46,10 +47,10 @@ function HomeFocus() {
               <div className="reviewData">Iron Gate AB</div>
               <div className="reviewData">Coffee Stain Publishing</div>
               <button className="genreButton">Survival</button>
+              <div className="focusButtonShell">
+                <div className="modalFooterText">Show more</div>
+              </div>
             </div>
-          </div>
-          <div className="focusButtonShell">
-            <button className="focusTitleButton">Show More</button>
           </div>
         </div>
       </div>

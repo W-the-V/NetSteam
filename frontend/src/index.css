@@ -66,9 +66,11 @@ body {
 .modalFooterText {
   cursor: pointer;
   width: fit-content;
+  text-decoration: underline;
+  color: #66c0f4;
 }
 .modalFooterText:hover {
-  text-decoration: underline;
+  color: white;
 }
 .modalErrors {
   margin: 0;

@@ -1,22 +1,29 @@
 .homeFocusShell {
   background-color: rgba(23, 26, 33, 0.4);
   width: 95%;
+  margin-top: 200px;
   margin: 20px;
   margin-bottom: 0;
   height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 1000px;
 }
 .focusInnerShell {
   width: 95%;
   height: 85%;
   display: flex;
   justify-content: space-around;
+  min-width: 950px;
 }
 .videoOuterShell {
   height: 100%;
   width: 70%;
+  min-width: 200px;
+}
+.focusVideo {
+  min-width: 200px;
 }
 .focusTitleBox {
   width: 95%;
@@ -32,6 +39,7 @@
 }
 .focusAboutShell {
   width: 30%;
+  min-width: 350px;
   margin-left: 20px;
 }
 .gameImg {
@@ -94,8 +102,8 @@
 }
 .focusButtonShell {
   width: 100%;
-  height: 50px;
+  height: 20px;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
 }

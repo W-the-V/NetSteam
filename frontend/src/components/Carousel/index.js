@@ -19,14 +19,23 @@ function Carousel() {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={125}
-        totalSlides={3}
+        totalSlides={4}
+        infinite={true}
         className="carouselInnerShell"
       >
-        <ButtonBack className="carouselButton">
-          <i className="fas fa-angle-left"></i>
+        <ButtonBack className="carouselButton cbLeft">
+          <i className="fas fa-angle-left arrowLeft"></i>
         </ButtonBack>
         <Slider className="carouselSlider">
           <Slide className="carouselSlide" index={0}>
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
             <img
               className="slide"
               src="https://netsteambucket.s3.amazonaws.com/header.jpg"
@@ -63,11 +72,27 @@ function Carousel() {
             ></img>
           </Slide>
           <Slide className="carouselSlide" index={2}>
-            I am the third Slide.
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
+            <img
+              className="slide"
+              src="https://netsteambucket.s3.amazonaws.com/header.jpg"
+            ></img>
           </Slide>
+          <Slide className="carouselSlide" index={3}></Slide>
         </Slider>
-        <ButtonNext className="carouselButton">
-          <i className="fas fa-angle-right"></i>
+        <ButtonNext className="carouselButton cbRight">
+          <i className="fas fa-angle-right arrowRight"></i>
         </ButtonNext>
       </CarouselProvider>
     </div>
