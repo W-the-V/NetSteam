@@ -7,6 +7,7 @@ import {
   deactivateLogin,
   activateLogin,
 } from "../../store/Modals";
+import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
 Modal.setAppElement(document.getElementById("root"));
@@ -22,8 +23,8 @@ function SignUpModal({ email, setEmail }) {
   const onclick = () => {
     dispatch(deactivateSignUp());
   };
-  const demoLogin = () => {
-    dispatch(
+  const demoLogin = async () => {
+    const res = await dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",
@@ -31,13 +32,14 @@ function SignUpModal({ email, setEmail }) {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
+    dispatch(getAllVideos(res.data.videoObj));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let toReturn;
+    let res;
     if (password === confirmPassword) {
       setErrors([]);
-      toReturn = await dispatch(
+      res = await dispatch(
         sessionActions.signup({
           email,
           username,
@@ -51,12 +53,13 @@ function SignUpModal({ email, setEmail }) {
         }
       });
     } else setErrors(["Passwords must match"]);
-    if (toReturn) {
+    if (res) {
       dispatch(deactivateLogin());
       dispatch(deactivateSignUp());
+      dispatch(getAllVideos(res.data.videoObj));
     }
 
-    return toReturn;
+    return res;
   };
   const changeForm = () => {
     dispatch(deactivateSignUp());

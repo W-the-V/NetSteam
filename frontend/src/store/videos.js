@@ -18,4 +18,4 @@ const videosReducer = (state = initialState, action) => {
       return state;
   }
 };
-export default getAllVideos;
+export default videosReducer;

@@ -9,6 +9,7 @@ import {
   activateSignUp,
   deactivateSignUp,
 } from "../../store/Modals";
+import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
 function Navigation({ isLoaded }) {
@@ -24,8 +25,8 @@ function Navigation({ isLoaded }) {
     dispatch(deactivateSignUp());
     dispatch(activateLogin());
   };
-  const demoLogin = () => {
-    dispatch(
+  const demoLogin = async () => {
+    const res = await dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",
@@ -33,6 +34,7 @@ function Navigation({ isLoaded }) {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
+    dispatch(getAllVideos(res.data.videoObj));
   };
   return (
     <div className="navOuterShell">

@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   session,
   modal: modalReducer,
   menu: menuReducer,
-  videos: videoReducer,
+  videos: videosReducer,
 });
 
 let enhancer;
