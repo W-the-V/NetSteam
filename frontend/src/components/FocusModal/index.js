@@ -118,7 +118,49 @@ const FocusModal = () => {
             </div>
             <div className="commentBottomRight">
               <div className="bottomRightTitle">Recently Posted</div>
-              <div className="commentRightShell"></div>
+              <div className="commentRightShell">
+                <div className="commentOuterShell">
+                  <div className="commentInnerLeft">
+                    <div className="userProfileImg"></div>
+                    <div className="commentUserInfo">
+                      <div className="commentUserName">PecMajor</div>
+                      <div className="userTotal">1 comment</div>
+                    </div>
+                  </div>
+                  <div className="commentInnerRight">
+                    <div className="commentInnerRightTitle">
+                      <div className="ratingImage"></div>
+                      <div className="commentTitleText">
+                        <div className="ratingText">Recommended</div>
+                        <div className="commentDate">Posted: March 11</div>
+                      </div>
+                    </div>
+                    <div className="commentLowerRightShell">
+                      <div className="commentText">
+                        Horizon Zero Dawn is a third person/single player action
+                        game set in post-apocalyptic land ruled by mechanical
+                        creatures, in which the remains of humanity are split
+                        into warring tribes and kingdoms that dwell among the
+                        ruins of ancient times. And so here we are, in a
+                        regressed to a primitive state Earth, where we take on a
+                        role of a young huntress, an outcast of the Nora tribe,
+                        Aloy, who's forced by a series of events to go on a
+                        journey to not only uncover her past but also the
+                        origins of the world she Horizon Zero Dawn is a third
+                        person/single player action game set in post-apocalyptic
+                        land ruled by mechanical creatures, in which the remains
+                        of humanity are split into warring tribes and kingdoms
+                        that dwell among the ruins of ancient times. And so here
+                        we are, in a regressed to a primitive state Earth, where
+                        we take on a role of a young huntress, an outcast of the
+                        Nora tribe, Aloy, who's forced by a series of events to
+                        go on a journey to not only uncover her past but also
+                        the origins of the world she
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
