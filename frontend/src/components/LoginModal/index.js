@@ -6,6 +6,7 @@ import {
   deactivateLogin,
   deactivateSignUp,
 } from "../../store/Modals";
+import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
 Modal.setAppElement(document.getElementById("root"));
@@ -20,19 +21,21 @@ const LoginModal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    let toReturn = await dispatch(
+    let res = await dispatch(
       sessionActions.login({ credential, password })
     ).catch(async (res) => {
       if (res.data && res.data.errors) setErrors(res.data.errors);
     });
-    if (toReturn) {
+    if (res) {
       dispatch(deactivateLogin());
       dispatch(deactivateSignUp());
+      dispatch(getAllVideos(res.data.videoObj));
     }
-    return toReturn;
+
+    return res;
   };
-  const demoLogin = () => {
-    dispatch(
+  const demoLogin = async () => {
+    let res = await dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",
@@ -40,6 +43,7 @@ const LoginModal = () => {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
+    dispatch(getAllVideos(res.data.videoObj));
   };
 
   const onclick = () => {

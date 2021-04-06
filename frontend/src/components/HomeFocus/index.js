@@ -1,60 +1,83 @@
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Carousel from "../Carousel";
+import ReactPlayer from "react-player";
+import { setFocusModal } from "../../store/Modals";
 import "./HomeFocus.css";
 
 function HomeFocus() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  let videos = useSelector((state) => state.videos);
+  const [focusId, setFocusId] = useState("1");
+  let videoOne = videos[focusId];
+  useEffect(() => {
+    videoOne = videos[focusId];
+  }, [focusId]);
+  const onClick2 = (id) => {
+    dispatch(setFocusModal(id));
+  };
   if (!sessionUser) {
     return <Redirect to="/" />;
   }
-  let src = "https://netsteambucket.s3.amazonaws.com/header.jpg";
   return (
-    <div className="homeFocusShell">
-      <div className="focusTitleBox">
-        <div className="focusTitle">Lofi</div>
-      </div>
-      <div className="focusInnerShell">
-        <div className="videoOuterShell">
-          <iframe
-            className="focusVideo"
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/5qap5aO4i9A?rel=0&modestbranding=1"
-            frameborder="0"
-            allow="accelerometer; encrypted-media; gyroscope;"
-            allowfullscreen="allowfullscreen"
-          ></iframe>
+    <>
+      <div className="homeFocusShell">
+        <div className="focusTitleBox">
+          <div className="focusTitle">{videoOne?.title}</div>
         </div>
-        <div className="focusAboutShell">
-          <img className="gameImg" src={src}></img>
-          <div className="aboutVideoText">
-            A brutal exploration and survival game for 1-10 players, set in a
-            procedurally-generated purgatory inspired by viking culture. Battle,
-            build, and conquer your way to a saga worthy of Odin’s patronage!
+        <div className="focusInnerShell">
+          <div className="videoOuterShell">
+            <ReactPlayer
+              className="focusVideo"
+              controls={true}
+              volume={0.5}
+              pip={false}
+              width="94%"
+              height="100%"
+              url={videoOne?.embedURL}
+            />
           </div>
-          <div className="reviewOuterShell">
-            <div className="reviewTitleBox">
-              <div className="reviewTitles">All Reviews:</div>
-              <div className="reviewTitles">Release Date:</div>
-              <div className="reviewTitles">Developer:</div>
-              <div className="reviewTitles">Publisher:</div>
-              <div className="reviewTitles reviewGenre">Genre:</div>
-            </div>
-            <div className="reviewDataBox">
-              <div className="reviewData">Overwhelmingly Positive (70,448)</div>
-              <div className="reviewData">Feb 2, 2021</div>
-              <div className="reviewData">Iron Gate AB</div>
-              <div className="reviewData">Coffee Stain Publishing</div>
-              <button className="genreButton">Survival</button>
-              <div className="focusButtonShell">
-                <div className="modalFooterText">Show more</div>
+          <div className="focusAboutShell">
+            <img className="gameImg" src={videoOne?.imageURL}></img>
+            <div className="aboutVideoText">{videoOne?.about}</div>
+            <div className="reviewOuterShell">
+              <div className="reviewTitleBox">
+                <div className="reviewTitles">All Reviews:</div>
+                <div className="reviewTitles">Release Date:</div>
+                <div className="reviewTitles">Developer:</div>
+                <div className="reviewTitles">Publisher:</div>
+                <div className="reviewTitles reviewGenre">Genre:</div>
+              </div>
+              <div className="reviewDataBox">
+                <div className="reviewData">
+                  Overwhelmingly Positive (70,448)
+                </div>
+                <div className="reviewData">{videoOne?.releaseDate}</div>
+                <div className="reviewData">{videoOne?.developer}</div>
+                <div className="reviewData">{videoOne?.publisher}</div>
+                <button className="genreButton">Survival</button>
+                <div className="focusButtonShell">
+                  <div
+                    className="modalFooterText"
+                    onClick={() => onClick2(videoOne.id)}
+                  >
+                    Show more
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Carousel
+        title={"Trending"}
+        focusId={focusId}
+        setFocusId={setFocusId}
+        videos={videos}
+      />
+    </>
   );
 }
 export default HomeFocus;

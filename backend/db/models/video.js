@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       imageURL: DataTypes.TEXT,
       developer: DataTypes.STRING,
       publisher: DataTypes.STRING,
+      releaseDate: DataTypes.STRING,
     },
     {}
   );

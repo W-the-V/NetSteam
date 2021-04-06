@@ -2,6 +2,8 @@ const LOGIN_MODAL_ACTIVE = "loginModal/active";
 const LOGIN_MODAL_INACTIVE = "loginModal/inactive";
 const SIGNUP_MODAL_ACTIVE = "signUpModal/active";
 const SIGNUP_MODAL_INACTIVE = "signUpModal/inactive";
+const SET_FOCUS_MODAL = "focus/set";
+const DEACTIVATE_FOCUS_MODAL = "focus/deactivate";
 
 export const activateLogin = () => {
   return {
@@ -27,9 +29,25 @@ export const deactivateSignUp = () => {
   };
 };
 
-const initialState = { login: false, signup: false };
+export const setFocusModal = (id) => {
+  return {
+    type: SET_FOCUS_MODAL,
+    id: id,
+  };
+};
+export const deactivateFocus = () => {
+  return {
+    type: DEACTIVATE_FOCUS_MODAL,
+  };
+};
+const initialState = {
+  login: false,
+  signup: false,
+  focus: { status: false, id: 0 },
+};
 const modalReducer = (state = initialState, action) => {
   let newState;
+  console.log(action);
   switch (action.type) {
     case LOGIN_MODAL_ACTIVE:
       newState = Object.assign({}, state, { login: true });
@@ -42,6 +60,16 @@ const modalReducer = (state = initialState, action) => {
       return newState;
     case SIGNUP_MODAL_INACTIVE:
       newState = Object.assign({}, state, { signup: false });
+      return newState;
+    case SET_FOCUS_MODAL:
+      newState = Object.assign({}, state, {
+        focus: { status: true, id: action.id },
+      });
+      return newState;
+    case DEACTIVATE_FOCUS_MODAL:
+      newState = Object.assign({}, state, {
+        focus: { status: false, id: 0 },
+      });
       return newState;
     default:
       return state;

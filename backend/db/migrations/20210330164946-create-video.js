@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Genres" },
       },
-      imageUrl: {
+      imageURL: {
         allowNull: false,
         type: Sequelize.TEXT,
       },
@@ -34,6 +34,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       publisher: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      releaseDate: {
         allowNull: false,
         type: Sequelize.STRING,
       },
