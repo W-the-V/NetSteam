@@ -8,32 +8,54 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
+import { setFocusModal } from "../../store/Modals";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "./Carousel.css";
 
 function Carousel({ title, focusId, setFocusId, videos }) {
+  const dispatch = useDispatch();
+  const onClick1 = (id) => {
+    setFocusId(id);
+  };
+  const onClick2 = (id) => {
+    dispatch(setFocusModal(id));
+  };
+
   function videoMap(videos) {
     videos = Object.values(videos);
     let count = Math.ceil(videos.length / 5);
     let index = 0;
-    let slideCount = 0;
-    const returnArr = [];
+    let slideTotal = 0;
+    let slideCount = 1;
+    let returnArr = [];
     while (count) {
       let slides = [];
-      while (slideCount < videos.length) {
+      while (slideTotal < videos.length && slideCount % 6 !== 0) {
+        const currentSlide = slideTotal;
         slides.push(
-          <img className="slide" src={videos[slideCount]?.imageURL}></img>
+          <img
+            className="slide"
+            src={videos[slideTotal]?.imageURL}
+            onClick={
+              title === "Trending"
+                ? () => onClick1(videos[currentSlide]?.id)
+                : () => onClick2(videos[currentSlide]?.id)
+            }
+          ></img>
         );
         slideCount++;
+        slideTotal++;
       }
       returnArr.push(
         <Slide className="carouselSlide" index={index}>
           {slides}
         </Slide>
       );
-      index += 1;
+      slideCount = 1;
+      index++;
       count--;
     }
+    returnArr = [...returnArr];
     return returnArr;
   }
   return (

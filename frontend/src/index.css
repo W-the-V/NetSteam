@@ -5,6 +5,20 @@ body {
   box-sizing: border-box;
   outline: none;
 }
+::-webkit-scrollbar {
+  height: 8px;
+  width: 10px;
+  background: #171a21;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d5e0;
+  -webkit-border-radius: 8px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #171a21;
+}
 #root {
   box-sizing: border-box;
 }

@@ -8,6 +8,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        type: "Open World",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Action",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 
