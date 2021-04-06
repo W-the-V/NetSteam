@@ -34,7 +34,6 @@ function Navigation({ isLoaded }) {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
-    dispatch(getAllVideos(res.data.videoObj));
   };
   return (
     <div className="navOuterShell">

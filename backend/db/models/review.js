@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Review",
     {
       score: DataTypes.INTEGER,
+      recommended: DataTypes.BOOLEAN,
       userId: DataTypes.INTEGER,
       body: DataTypes.TEXT,
       videoId: DataTypes.INTEGER,

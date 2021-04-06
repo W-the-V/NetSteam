@@ -29,7 +29,6 @@ const LoginModal = () => {
     if (res) {
       dispatch(deactivateLogin());
       dispatch(deactivateSignUp());
-      dispatch(getAllVideos(res.data.videoObj));
     }
 
     return res;
@@ -43,7 +42,6 @@ const LoginModal = () => {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
-    dispatch(getAllVideos(res.data.videoObj));
   };
 
   const onclick = () => {

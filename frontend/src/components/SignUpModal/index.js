@@ -24,7 +24,7 @@ function SignUpModal({ email, setEmail }) {
     dispatch(deactivateSignUp());
   };
   const demoLogin = async () => {
-    const res = await dispatch(
+    dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",
@@ -32,7 +32,6 @@ function SignUpModal({ email, setEmail }) {
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
-    dispatch(getAllVideos(res.data.videoObj));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,9 +55,7 @@ function SignUpModal({ email, setEmail }) {
     if (res) {
       dispatch(deactivateLogin());
       dispatch(deactivateSignUp());
-      dispatch(getAllVideos(res.data.videoObj));
     }
-
     return res;
   };
   const changeForm = () => {
