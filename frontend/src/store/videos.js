@@ -1,10 +1,17 @@
 const GET_VIDEOS = "videos/get";
 
-export const getAllVideos = (videos) => {
+export const setVideos = (videos) => {
   return {
     type: GET_VIDEOS,
     payload: videos,
   };
+};
+export const getAllVideos = () => async (dispatch) => {
+  let res = await fetch("/api/home");
+  res = await res.json();
+  console.log(res.videoObj);
+  dispatch(setVideos(res.videoObj));
+  return res;
 };
 
 const initialState = {};

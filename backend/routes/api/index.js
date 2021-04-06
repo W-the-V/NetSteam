@@ -1,6 +1,7 @@
-const router = require('express').Router();
-const sessionRouter = require('./session.js');
-const usersRouter = require('./users.js');
+const router = require("express").Router();
+const sessionRouter = require("./session.js");
+const usersRouter = require("./users.js");
+const homeRouter = require("./home.js");
 
 // GET /api/set-token-cookie
 // const asyncHandler = require('express-async-handler');
@@ -20,17 +21,18 @@ const usersRouter = require('./users.js');
 // );
 
 // GET /api/restore-user
-const { restoreUser } = require('../../utils/auth.js');
-router.get('/restore-user', restoreUser, (req, res) => {
+const { restoreUser } = require("../../utils/auth.js");
+router.get("/restore-user", restoreUser, (req, res) => {
   return res.json(req.user);
 });
 
-router.post('/test', function (req, res) {
+router.post("/test", function (req, res) {
   res.json({ requestBody: req.body });
 });
+router.use(homeRouter);
 
-router.use('/session', sessionRouter);
+router.use("/session", sessionRouter);
 
-router.use('/users', usersRouter);
+router.use("/users", usersRouter);
 
 module.exports = router;

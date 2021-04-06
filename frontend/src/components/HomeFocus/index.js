@@ -12,8 +12,56 @@ function HomeFocus() {
   let videos = useSelector((state) => state.videos);
   const [focusId, setFocusId] = useState("1");
   let videoOne = videos[focusId];
+
+  let videoScore = () => {
+    let returnScore = 0;
+    let returnCount = 0;
+    if (videoOne?.Reviews) {
+      videoOne.Reviews.forEach((review) => {
+        returnScore += review.score;
+        returnCount++;
+      });
+    }
+    returnScore = returnScore / returnCount;
+    switch (Math.round(returnScore)) {
+      case 0:
+        returnScore = "Overwhelmingly Negative";
+        break;
+      case 1:
+        returnScore = "Very Negative";
+        break;
+      case 2:
+        returnScore = "Negative";
+        break;
+      case 3:
+        returnScore = "Mostly Negative";
+        break;
+      case 4:
+        returnScore = "Mixed";
+        break;
+      case 5:
+        returnScore = "Mostly Positive";
+        break;
+      case 6:
+        returnScore = "Positive";
+        break;
+      case 7:
+        returnScore = "Very Positive";
+        break;
+      case 8:
+        returnScore = "Overwhelmingly Positive";
+        break;
+      default:
+        returnScore = "No Reviews Yet";
+        break;
+    }
+    const returnObj = { score: returnScore, total: returnCount };
+    return returnObj;
+  };
+  let score = videoScore();
   useEffect(() => {
     videoOne = videos[focusId];
+    score = videoScore();
   }, [focusId]);
   const onClick2 = (id) => {
     dispatch(setFocusModal(id));
@@ -52,7 +100,12 @@ function HomeFocus() {
               </div>
               <div className="reviewDataBox">
                 <div className="reviewData">
-                  Overwhelmingly Positive (70,448)
+                  {score?.score}
+                  {score?.score !== "No Reviews Yet" ? (
+                    <div className="totalReviewText">
+                      ({score?.total} Reviews)
+                    </div>
+                  ) : null}
                 </div>
                 <div className="reviewData">{videoOne?.releaseDate}</div>
                 <div className="reviewData">{videoOne?.developer}</div>

@@ -5,12 +5,16 @@ import "./Home.css";
 import HomeFocus from "../HomeFocus";
 import Carousel from "../Carousel";
 import FocusModal from "../FocusModal";
+import { getAllVideos } from "../../store/videos";
 
 function Home() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [focusId, setFocusId] = useState("1");
   let videos = useSelector((state) => state.videos);
+  useEffect(() => {
+    dispatch(getAllVideos());
+  }, []);
   if (!sessionUser) {
     return <Redirect to="/" />;
   }
