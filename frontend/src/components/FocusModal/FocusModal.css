@@ -172,7 +172,7 @@
   margin-bottom: 20px;
 }
 .commentText {
-  height: 140px;
+  height: 145px;
   display: flex;
   overflow: hidden;
 }
@@ -182,6 +182,7 @@
 }
 .commentDate {
   font-size: 14px;
+  margin-left: 20px;
 }
 .commentText {
   margin-top: 10px;
@@ -231,6 +232,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-top: 15px;
 }
 .commentInnerShell {
   width: 100%;

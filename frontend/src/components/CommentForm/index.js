@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { deactivateComment } from "../../store/Modals";
-import { postComment } from "../../store/reviews";
+import { postComment, editComment } from "../../store/reviews";
 import "./CommentForm.css";
 
 const CommentModal = ({
@@ -11,6 +11,8 @@ const CommentModal = ({
   prevRecommend,
   prevCommentText,
   prevScore,
+  edit,
+  setEdit,
 }) => {
   const dispatch = useDispatch();
   const commentState = useSelector((state) => state.modal.comment);
@@ -28,6 +30,17 @@ const CommentModal = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (edit) {
+      await dispatch(
+        editComment(recommend, score, commentText, editId, userId)
+      );
+      document.getElementById(`edit${editId}`).classList.add("hiddenComment");
+      document
+        .getElementById(`edit${editId}`)
+        .classList.remove("commentInnerShell");
+      document.getElementById(`${editId}`).classList.remove("hiddenComment");
+      return setEdit(false);
+    }
     const res = await dispatch(
       postComment(recommend, score, commentText, focusId, userId)
     );

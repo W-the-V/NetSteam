@@ -7,6 +7,7 @@ import {
   activateComment,
   deactivateComment,
 } from "../../store/Modals";
+import { deleteComment } from "../../store/reviews";
 
 import CommentModal from "../CommentForm";
 import "./FocusModal.css";
@@ -19,6 +20,7 @@ const FocusModal = () => {
   const focusState = useSelector((state) => state.modal.focus.status);
   const focusId = useSelector((state) => state.modal.focus.id);
   const reviews = useSelector((state) => state.reviews);
+  const userId = useSelector((state) => state.session.user.id);
   let videos = useSelector((state) => state.videos);
   let videoOne = videos[focusId];
   const [edit, setEdit] = useState(false);
@@ -79,6 +81,7 @@ const FocusModal = () => {
     dispatch(deactivateFocus());
   };
   const onclick2 = () => {
+    if (edit) return;
     if (commentState) dispatch(deactivateComment());
     else dispatch(activateComment());
   };
@@ -91,6 +94,11 @@ const FocusModal = () => {
     document
       .getElementById(`edit${commentId}`)
       .classList.add("commentInnerShell");
+    setEdit(true);
+  };
+  const onclick4 = async (editId, userId) => {
+    const res = await dispatch(deleteComment(editId, userId));
+    return res;
   };
   return (
     <>
@@ -215,14 +223,25 @@ const FocusModal = () => {
                         <div className="commentLowerRightShell">
                           <div className="commentText">{rev?.body}</div>
                         </div>
-                        <div className="commentBtnShell">
+                        <div
+                          className={
+                            userId == rev?.userId
+                              ? "commentBtnShell"
+                              : "commentBtnShell hiddenComment"
+                          }
+                        >
                           <button
                             className="commentBtnS"
                             onClick={() => onclick3(rev.id)}
                           >
                             Edit
                           </button>
-                          <button className="commentBtnS">Delete</button>
+                          <button
+                            className="commentBtnS"
+                            onClick={() => onclick4(rev.id, userId)}
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -232,6 +251,8 @@ const FocusModal = () => {
                       prevRecommend={rev?.recommended}
                       prevCommentText={rev?.body}
                       prevScore={rev?.score}
+                      edit={edit}
+                      setEdit={setEdit}
                     />
                   </div>
                 ))}

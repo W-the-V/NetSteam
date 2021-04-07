@@ -45,4 +45,45 @@ router.post(
     }
   })
 );
+
+router.post(
+  "/:reviewId",
+  asyncHandler(async (req, res, next) => {
+    const reviewId = req.params.reviewId;
+    const { recommend, score, commentText, userId } = req.body;
+    console.log(userId);
+    const review = await Review.findByPk(reviewId);
+    console.log(review.userId);
+    if (userId !== review.userId) return;
+    const videoId = review.videoId;
+    review.score = score;
+    review.recommended = recommend;
+    review.body = commentText;
+    await review.save();
+
+    let reviews = await Review.findAll({
+      where: { videoId },
+      include: User,
+    });
+    let reviewObj = {};
+    reviews = reviews.map((review) => {
+      reviewObj[review.dataValues.id] = review.dataValues;
+    });
+    return res.json({ reviewObj });
+  })
+);
+
+router.delete(
+  "/:reviewId",
+  asyncHandler(async (req, res, next) => {
+    const reviewId = req.params.reviewId;
+    const { userId } = req.body;
+    const review = await Review.findByPk(reviewId);
+    if (userId !== review.userId) return;
+
+    await review.destroy();
+
+    return res.json({ reviewId });
+  })
+);
 module.exports = router;

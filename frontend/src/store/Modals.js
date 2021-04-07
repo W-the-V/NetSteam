@@ -61,7 +61,6 @@ const initialState = {
 };
 const modalReducer = (state = initialState, action) => {
   let newState;
-  console.log(action);
   switch (action.type) {
     case LOGIN_MODAL_ACTIVE:
       newState = Object.assign({}, state, { login: true });
