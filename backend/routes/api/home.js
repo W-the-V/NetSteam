@@ -11,6 +11,9 @@ router.get(
     const videos = await Video.findAll({
       include: [
         {
+          model: Review,
+        },
+        {
           model: Genre,
         },
       ],

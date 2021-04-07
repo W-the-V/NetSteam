@@ -27,15 +27,16 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
         .classList.remove("commentInnerShell");
       document.getElementById(`${editId}`).classList.remove("hiddenComment");
       return setEdit(false);
+    } else {
+      const res = await dispatch(
+        postComment(recommend, score, commentText, focusId, userId)
+      );
+      // console.log(res);
+      // console.log(await reviewOne);
+      // setRecommend(reviewOne[res].recommend);
+      // reviewOne.forceUpdate();
+      dispatch(deactivateComment());
     }
-    const res = await dispatch(
-      postComment(recommend, score, commentText, focusId, userId)
-    );
-    console.log(res);
-    console.log(await reviewOne);
-    // setRecommend(reviewOne[res].recommend);
-    // reviewOne.forceUpdate();
-    dispatch(deactivateComment());
   };
   const onclickUp = () => {
     setRecommend(true);

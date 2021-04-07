@@ -88,9 +88,6 @@ const FocusModal = () => {
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
-  const sortReviews = (reviews) => {
-    return reviews.sort((a, b) => a.updatedAt < b.updatedAt);
-  };
   let score = videoScore();
   const onclick = () => {
     dispatch(deactivateFocus());
@@ -199,7 +196,7 @@ const FocusModal = () => {
               </div>
               <div className="commentLeftShell">
                 {commentState && <CommentModal />}
-                {sortReviews(reviews).map((rev) => (
+                {reviews.map((rev) => (
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
