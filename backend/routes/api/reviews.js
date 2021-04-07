@@ -33,15 +33,15 @@ router.post(
       videoId,
     });
     if (review) {
-      let reviews = await Review.findAll({
-        where: { videoId: req.params.videoId },
-        include: User,
-      });
-      let reviewObj = {};
-      reviews = reviews.map((review) => {
-        reviewObj[review.dataValues.id] = review.dataValues;
-      });
-      return res.json({ reviewObj, reviewId: review.id });
+      // let reviews = await Review.findAll({
+      //   where: { videoId: req.params.videoId },
+      //   include: User,
+      // });
+      // let reviewObj = {};
+      // reviews = reviews.map((review) => {
+      //   reviewObj[review.dataValues.id] = review.dataValues;
+      // });
+      return res.json({ review });
     }
   })
 );

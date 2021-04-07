@@ -12,7 +12,11 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
   const focusId = useSelector((state) => state.modal.focus.id);
   let videos = useSelector((state) => state.videos);
   let reviewOne = useSelector((state) => state.reviews);
-  const [recommend, setRecommend] = useState(reviewOne[editId]?.recommended);
+  const [recommend, setRecommend] = useState(
+    reviewOne[editId]?.recommended.toString()
+      ? reviewOne[editId]?.recommended
+      : true
+  );
   const [commentText, setCommentText] = useState(reviewOne[editId]?.body);
   const [score, setScore] = useState(reviewOne[editId]?.score);
   const handleSubmit = async (e) => {

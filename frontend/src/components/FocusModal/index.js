@@ -27,6 +27,7 @@ const FocusModal = () => {
   reviews = Object.values(reviews).filter(
     (review) => review.videoId === focusId
   );
+  // .sort((a, b) => a.updatedAt < b.updatedAt);
 
   const getDate = (date) => {
     date = date.split("-");
@@ -90,6 +91,7 @@ const FocusModal = () => {
   };
   let score = videoScore();
   const onclick = () => {
+    setEdit(false);
     dispatch(deactivateFocus());
   };
   const onclick2 = () => {

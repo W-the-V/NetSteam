@@ -1,6 +1,7 @@
 import { fetch } from "./csrf.js";
 const GET_REVIEWS = "reviews/get";
 const REMOVE_REVIEW = "reviews/remove";
+const ADD_REVIEW = "reviews/add";
 
 export const setReviews = (reviews) => {
   return {
@@ -12,6 +13,12 @@ export const deleteReview = (reviewId) => {
   return {
     type: REMOVE_REVIEW,
     payload: reviewId,
+  };
+};
+export const addReview = (review) => {
+  return {
+    type: ADD_REVIEW,
+    payload: review,
   };
 };
 export const getVideoComments = (videoId) => async (dispatch) => {
@@ -31,8 +38,8 @@ export const postComment = (
     method: "POST",
     body: JSON.stringify({ recommend, score, commentText, userId }),
   });
-  dispatch(setReviews(res.data.reviewObj));
-  return res.data.reviewId;
+  dispatch(addReview(res.data.review));
+  return res.data.review;
 };
 
 export const editComment = (
@@ -69,7 +76,10 @@ const reviewReducer = (state = initialState, action) => {
     case REMOVE_REVIEW:
       newState = Object.assign({}, state);
       delete newState[action.payload];
-      console.log(state);
+      return newState;
+    case ADD_REVIEW:
+      newState = Object.assign({}, state);
+      newState[action.payload.id] = action.payload;
       return newState;
     default:
       return state;
