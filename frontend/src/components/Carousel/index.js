@@ -9,6 +9,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import { setFocusModal } from "../../store/Modals";
+import { getVideoComments } from "../../store/reviews";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import "./Carousel.css";
 
@@ -19,6 +20,7 @@ function Carousel({ title, focusId, setFocusId, videos }) {
   };
   const onClick2 = (id) => {
     dispatch(setFocusModal(id));
+    dispatch(getVideoComments(id));
   };
 
   function videoMap(videos) {
@@ -36,10 +38,11 @@ function Carousel({ title, focusId, setFocusId, videos }) {
           <img
             className="slide"
             src={videos[slideTotal]?.imageURL}
-            onClick={
+            onClick={() => onClick2(videos[currentSlide]?.id)}
+            onMouseEnter={
               title === "Trending"
                 ? () => onClick1(videos[currentSlide]?.id)
-                : () => onClick2(videos[currentSlide]?.id)
+                : null
             }
           ></img>
         );

@@ -4,12 +4,14 @@ import session from "./session";
 import modalReducer from "./Modals";
 import menuReducer from "./showMenu";
 import videosReducer from "./videos";
+import reviewReducer from "./reviews";
 
 const rootReducer = combineReducers({
   session,
   modal: modalReducer,
   menu: menuReducer,
   videos: videosReducer,
+  reviews: reviewReducer,
 });
 
 let enhancer;

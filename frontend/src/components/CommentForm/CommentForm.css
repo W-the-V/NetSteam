@@ -1,0 +1,78 @@
+.commentForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.radBtn {
+  margin-left: -25px;
+  z-index: -1;
+}
+.ratingText {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.addUp {
+  margin-left: 80px;
+  cursor: pointer;
+}
+.addUp.active {
+  background-color: #66c0f4;
+  color: white;
+}
+.addDown.active {
+  background-color: #e06463;
+  color: white;
+}
+.addDown {
+  margin-left: 40px;
+  cursor: pointer;
+}
+.recommendShell {
+  display: flex;
+  height: 80px;
+  align-items: center;
+}
+.scaleShell {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+}
+.scaleText {
+  margin-right: 10px;
+}
+.ratingRad {
+  margin-left: 10px;
+}
+.commentTextEntry {
+  width: 90%;
+  margin-top: 20px;
+  overflow-y: scroll;
+  height: 90px;
+  resize: none;
+  font-size: 18px;
+  outline: none;
+  background-color: #2a475e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.commentSubmit {
+  margin-top: 10px;
+  height: 30px;
+  width: 70px;
+  font-size: 20px;
+  background-color: #2a475e;
+  color: #66c0f4;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+.commentSubmit:hover {
+  background-color: #66c0f4;
+  color: white;
+}

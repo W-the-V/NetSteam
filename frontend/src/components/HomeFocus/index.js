@@ -82,7 +82,7 @@ function HomeFocus() {
               controls={true}
               volume={0.5}
               pip={false}
-              width="94%"
+              width="100%"
               height="100%"
               url={videoOne?.embedURL}
             />
@@ -110,7 +110,7 @@ function HomeFocus() {
                 <div className="reviewData">{videoOne?.releaseDate}</div>
                 <div className="reviewData">{videoOne?.developer}</div>
                 <div className="reviewData">{videoOne?.publisher}</div>
-                <button className="genreButton">Survival</button>
+                <button className="genreButton">{videoOne?.Genre.type}</button>
                 <div className="focusButtonShell">
                   <div
                     className="modalFooterText"

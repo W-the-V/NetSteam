@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
-import { deactivateFocus } from "../../store/Modals";
+import {
+  deactivateFocus,
+  activateComment,
+  deactivateComment,
+} from "../../store/Modals";
+
+import CommentModal from "../CommentForm";
 import "./FocusModal.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
 const FocusModal = () => {
   const dispatch = useDispatch();
+  const commentState = useSelector((state) => state.modal.comment);
   const focusState = useSelector((state) => state.modal.focus.status);
   const focusId = useSelector((state) => state.modal.focus.id);
+  const reviews = useSelector((state) => state.reviews);
   let videos = useSelector((state) => state.videos);
   let videoOne = videos[focusId];
+  const [edit, setEdit] = useState(false);
   const getDate = (date) => {
     date = date.split("-");
     let day = date[2].split("");
@@ -23,8 +32,8 @@ const FocusModal = () => {
   let videoScore = () => {
     let returnScore = 0;
     let returnCount = 0;
-    if (videoOne?.Reviews) {
-      videoOne.Reviews.forEach((review) => {
+    if (reviews) {
+      Object.values(reviews).forEach((review) => {
         returnScore += review.score;
         returnCount++;
       });
@@ -68,6 +77,20 @@ const FocusModal = () => {
   let score = videoScore();
   const onclick = () => {
     dispatch(deactivateFocus());
+  };
+  const onclick2 = () => {
+    if (commentState) dispatch(deactivateComment());
+    else dispatch(activateComment());
+  };
+  const onclick3 = (commentId) => {
+    if (edit) return;
+    document.getElementById(`${commentId}`).classList.add("hiddenComment");
+    document
+      .getElementById(`edit${commentId}`)
+      .classList.remove("hiddenComment");
+    document
+      .getElementById(`edit${commentId}`)
+      .classList.add("commentInnerShell");
   };
   return (
     <>
@@ -119,7 +142,9 @@ const FocusModal = () => {
                   <div className="reviewData">{videoOne?.releaseDate}</div>
                   <div className="reviewData">{videoOne?.developer}</div>
                   <div className="reviewData">{videoOne?.publisher}</div>
-                  <button className="genreButton">Survival</button>
+                  <button className="genreButton">
+                    {videoOne?.Genre.type}
+                  </button>
                 </div>
               </div>
             </div>
@@ -146,46 +171,68 @@ const FocusModal = () => {
           <div className="commentSectionBottom">
             <div className="commentBottomLeft">
               <div className="bottomLeftTitle">
-                Comments (sorted by: rating)
+                <div>Comments (sorted by: rating)</div>
+                <button className="commentBtn" onClick={onclick2}>
+                  Create Comment
+                </button>
               </div>
               <div className="commentLeftShell">
-                {videoOne?.Reviews.map((rev) => (
+                {commentState && <CommentModal />}
+                {Object.values(reviews).map((rev) => (
                   <div className="commentOuterShell">
-                    <div className="commentInnerLeft">
-                      <div className="userProfileImg"></div>
-                      <div className="commentUserInfo">
-                        <div className="commentUserName">
-                          {rev?.User?.username}
-                        </div>
-                        <div className="userTotal">1 comment</div>
-                      </div>
-                    </div>
-                    <div className="commentInnerRight">
-                      <div className="commentInnerRightTitle">
-                        {rev?.recommended ? (
-                          <div className="ratingImageUp">
-                            <i className="fas fa-thumbs-up"></i>
+                    <div className="commentInnerShell" id={rev.id}>
+                      <div className="commentInnerLeft">
+                        <div className="userProfileImg"></div>
+                        <div className="commentUserInfo">
+                          <div className="commentUserName">
+                            {rev?.User?.username}
                           </div>
-                        ) : (
-                          <div className="ratingImageDown">
-                            <i className="fas fa-thumbs-down"></i>
-                          </div>
-                        )}
-                        <div className="commentTitleText">
-                          <div className="ratingText">
-                            {rev?.recommended
-                              ? "Recommended"
-                              : "Not Recommended"}
-                          </div>
-                          <div className="commentDate">
-                            {getDate(rev?.updatedAt)}
-                          </div>
+                          <div className="userTotal">1 comment</div>
                         </div>
                       </div>
-                      <div className="commentLowerRightShell">
-                        <div className="commentText">{rev?.body}</div>
+                      <div className="commentInnerRight">
+                        <div className="commentInnerRightTitle">
+                          {rev?.recommended ? (
+                            <div className="ratingImageUp">
+                              <i className="fas fa-thumbs-up"></i>
+                            </div>
+                          ) : (
+                            <div className="ratingImageDown">
+                              <i className="fas fa-thumbs-down"></i>
+                            </div>
+                          )}
+                          <div className="commentTitleText">
+                            <div className="ratingText">
+                              {rev?.recommended
+                                ? "Recommended"
+                                : "Not Recommended"}
+                            </div>
+                            <div className="commentDate">
+                              {getDate(rev?.updatedAt)}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="commentLowerRightShell">
+                          <div className="commentText">{rev?.body}</div>
+                        </div>
+                        <div className="commentBtnShell">
+                          <button
+                            className="commentBtnS"
+                            onClick={() => onclick3(rev.id)}
+                          >
+                            Edit
+                          </button>
+                          <button className="commentBtnS">Delete</button>
+                        </div>
                       </div>
                     </div>
+                    <CommentModal
+                      hidden={true}
+                      editId={rev.id}
+                      prevRecommend={rev?.recommended}
+                      prevCommentText={rev?.body}
+                      prevScore={rev?.score}
+                    />
                   </div>
                 ))}
               </div>

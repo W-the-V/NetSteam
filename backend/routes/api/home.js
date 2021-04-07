@@ -9,16 +9,16 @@ router.get(
   "/home",
   asyncHandler(async (req, res, next) => {
     const videos = await Video.findAll({
-      include: {
-        model: Review,
-        include: User,
-      },
+      include: [
+        {
+          model: Genre,
+        },
+      ],
     });
     let videoObj = {};
     videos.map((video) => {
       videoObj[video.id] = video.dataValues;
     });
-    console.log(videoObj);
     return res.json({
       videoObj,
     });

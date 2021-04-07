@@ -36,14 +36,9 @@ router.post(
     }
 
     await setTokenCookie(res, user);
-    const videos = await Video.findAll();
-    let videoObj = {};
-    videos.map((video) => {
-      videoObj[video.id] = video.dataValues;
-    });
+    
     return res.json({
       user,
-      videoObj,
     });
   })
 );

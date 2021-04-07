@@ -9,10 +9,10 @@ export const setVideos = (videos) => {
 export const getAllVideos = () => async (dispatch) => {
   let res = await fetch("/api/home");
   res = await res.json();
-  console.log(res.videoObj);
   dispatch(setVideos(res.videoObj));
   return res;
 };
+
 
 const initialState = {};
 const videosReducer = (state = initialState, action) => {

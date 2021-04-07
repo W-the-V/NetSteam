@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Video.associate = function (models) {
     Video.hasMany(models.UserList, { foreignKey: "videoId" });
     Video.hasMany(models.Review, { foreignKey: "videoId" });
+    Video.belongsTo(models.Genre, { foreignKey: "genreId" });
   };
   return Video;
 };
