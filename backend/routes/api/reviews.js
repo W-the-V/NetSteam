@@ -31,6 +31,12 @@ router.post(
       userId,
       body: commentText,
       videoId,
+      createdAt: new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+      }),
+      updatedAt: new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+      }),
     });
     if (review) {
       let reviews = await Review.findAll({
@@ -41,7 +47,7 @@ router.post(
       reviews = reviews.map((review) => {
         reviewObj[review.dataValues.id] = review.dataValues;
       });
-      return res.json({ reviewObj });
+      return res.json({ reviewObj, reviewId: review.id });
     }
   })
 );
@@ -51,9 +57,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const { recommend, score, commentText, userId } = req.body;
-    console.log(userId);
     const review = await Review.findByPk(reviewId);
-    console.log(review.userId);
     if (userId !== review.userId) return;
     const videoId = review.videoId;
     review.score = score;

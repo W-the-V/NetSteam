@@ -32,7 +32,7 @@ export const postComment = (
     body: JSON.stringify({ recommend, score, commentText, userId }),
   });
   dispatch(setReviews(res.data.reviewObj));
-  return res;
+  return res.data.reviewId;
 };
 
 export const editComment = (

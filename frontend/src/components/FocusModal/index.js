@@ -19,23 +19,35 @@ const FocusModal = () => {
   const commentState = useSelector((state) => state.modal.comment);
   const focusState = useSelector((state) => state.modal.focus.status);
   const focusId = useSelector((state) => state.modal.focus.id);
-  const reviews = useSelector((state) => state.reviews);
+  let reviews = useSelector((state) => state.reviews);
   const userId = useSelector((state) => state.session.user.id);
   let videos = useSelector((state) => state.videos);
   let videoOne = videos[focusId];
   const [edit, setEdit] = useState(false);
+  reviews = Object.values(reviews).filter(
+    (review) => review.videoId === focusId
+  );
+
   const getDate = (date) => {
     date = date.split("-");
     let day = date[2].split("");
+    let time = date[2].slice(3, 8);
+    time = time.split(":");
+    if (time[0] > 12) {
+      time[0] = time[0] - 12;
+      time[1] += "pm";
+    } else if (time[1] == 12) time[1] += "pm";
+    else time[1] += "am";
+    time = time.join(":");
     day = day[0] + day[1];
-    date = `Posted on ${date[1]}/${day}/${date[0]}`;
+    date = `Posted on ${date[1]}/${day}/${date[0]} at ${time}`;
     return date;
   };
   let videoScore = () => {
     let returnScore = 0;
     let returnCount = 0;
     if (reviews) {
-      Object.values(reviews).forEach((review) => {
+      reviews.forEach((review) => {
         returnScore += review.score;
         returnCount++;
       });
@@ -76,6 +88,9 @@ const FocusModal = () => {
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
+  const sortReviews = (reviews) => {
+    return reviews.sort((a, b) => a.updatedAt < b.updatedAt);
+  };
   let score = videoScore();
   const onclick = () => {
     dispatch(deactivateFocus());
@@ -86,14 +101,16 @@ const FocusModal = () => {
     else dispatch(activateComment());
   };
   const onclick3 = (commentId) => {
+    console.log(commentId);
+    console.log(reviews);
     if (edit) return;
-    document.getElementById(`${commentId}`).classList.add("hiddenComment");
+    document.getElementById(`${commentId}`)?.classList.add("hiddenComment");
     document
       .getElementById(`edit${commentId}`)
-      .classList.remove("hiddenComment");
+      ?.classList.remove("hiddenComment");
     document
       .getElementById(`edit${commentId}`)
-      .classList.add("commentInnerShell");
+      ?.classList.add("commentInnerShell");
     setEdit(true);
   };
   const onclick4 = async (editId, userId) => {
@@ -171,22 +188,18 @@ const FocusModal = () => {
                 ) : null}
               </div>
             </div>
-            <div className="commentTopRight">
-              <div className="topText">Recent Reviews: </div>
-              <div className="bottomText">Very Positive (34,117 reviews)</div>
-            </div>
           </div>
           <div className="commentSectionBottom">
             <div className="commentBottomLeft">
               <div className="bottomLeftTitle">
-                <div>Comments (sorted by: rating)</div>
+                <div>Reviews (sorted by: Most Recent)</div>
                 <button className="commentBtn" onClick={onclick2}>
                   Create Comment
                 </button>
               </div>
               <div className="commentLeftShell">
                 {commentState && <CommentModal />}
-                {Object.values(reviews).map((rev) => (
+                {sortReviews(reviews).map((rev) => (
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
@@ -256,52 +269,6 @@ const FocusModal = () => {
                     />
                   </div>
                 ))}
-              </div>
-            </div>
-            <div className="commentBottomRight">
-              <div className="bottomRightTitle">Recently Posted</div>
-              <div className="commentRightShell">
-                <div className="commentOuterShell">
-                  <div className="commentInnerLeft">
-                    <div className="userProfileImg"></div>
-                    <div className="commentUserInfo">
-                      <div className="commentUserName">PecMajor</div>
-                      <div className="userTotal">1 comment</div>
-                    </div>
-                  </div>
-                  <div className="commentInnerRight">
-                    <div className="commentInnerRightTitle">
-                      <div className="ratingImage"></div>
-                      <div className="commentTitleText">
-                        <div className="ratingText">Recommended</div>
-                        <div className="commentDate">Posted: March 11</div>
-                      </div>
-                    </div>
-                    <div className="commentLowerRightShell">
-                      <div className="commentText">
-                        Horizon Zero Dawn is a third person/single player action
-                        game set in post-apocalyptic land ruled by mechanical
-                        creatures, in which the remains of humanity are split
-                        into warring tribes and kingdoms that dwell among the
-                        ruins of ancient times. And so here we are, in a
-                        regressed to a primitive state Earth, where we take on a
-                        role of a young huntress, an outcast of the Nora tribe,
-                        Aloy, who's forced by a series of events to go on a
-                        journey to not only uncover her past but also the
-                        origins of the world she Horizon Zero Dawn is a third
-                        person/single player action game set in post-apocalyptic
-                        land ruled by mechanical creatures, in which the remains
-                        of humanity are split into warring tribes and kingdoms
-                        that dwell among the ruins of ancient times. And so here
-                        we are, in a regressed to a primitive state Earth, where
-                        we take on a role of a young huntress, an outcast of the
-                        Nora tribe, Aloy, who's forced by a series of events to
-                        go on a journey to not only uncover her past but also
-                        the origins of the world she
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
