@@ -12,7 +12,11 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
   const focusId = useSelector((state) => state.modal.focus.id);
   let videos = useSelector((state) => state.videos);
   let reviewOne = useSelector((state) => state.reviews);
-  const [recommend, setRecommend] = useState(reviewOne[editId]?.recommended);
+  const [recommend, setRecommend] = useState(
+    reviewOne[editId]?.recommended.toString()
+      ? reviewOne[editId]?.recommended
+      : true
+  );
   const [commentText, setCommentText] = useState(reviewOne[editId]?.body);
   const [score, setScore] = useState(reviewOne[editId]?.score);
   const handleSubmit = async (e) => {
@@ -27,15 +31,16 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
         .classList.remove("commentInnerShell");
       document.getElementById(`${editId}`).classList.remove("hiddenComment");
       return setEdit(false);
+    } else {
+      const res = await dispatch(
+        postComment(recommend, score, commentText, focusId, userId)
+      );
+      // console.log(res);
+      // console.log(await reviewOne);
+      // setRecommend(reviewOne[res].recommend);
+      // reviewOne.forceUpdate();
+      dispatch(deactivateComment());
     }
-    const res = await dispatch(
-      postComment(recommend, score, commentText, focusId, userId)
-    );
-    console.log(res);
-    console.log(await reviewOne);
-    // setRecommend(reviewOne[res].recommend);
-    // reviewOne.forceUpdate();
-    dispatch(deactivateComment());
   };
   const onclickUp = () => {
     setRecommend(true);

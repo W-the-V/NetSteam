@@ -27,6 +27,7 @@ const FocusModal = () => {
   reviews = Object.values(reviews).filter(
     (review) => review.videoId === focusId
   );
+  // .sort((a, b) => a.updatedAt < b.updatedAt);
 
   const getDate = (date) => {
     date = date.split("-");
@@ -88,11 +89,9 @@ const FocusModal = () => {
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
-  const sortReviews = (reviews) => {
-    return reviews.sort((a, b) => a.updatedAt < b.updatedAt);
-  };
   let score = videoScore();
   const onclick = () => {
+    setEdit(false);
     dispatch(deactivateFocus());
   };
   const onclick2 = () => {
@@ -199,7 +198,7 @@ const FocusModal = () => {
               </div>
               <div className="commentLeftShell">
                 {commentState && <CommentModal />}
-                {sortReviews(reviews).map((rev) => (
+                {reviews.map((rev) => (
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">

@@ -31,23 +31,17 @@ router.post(
       userId,
       body: commentText,
       videoId,
-      createdAt: new Date().toLocaleString("en-US", {
-        timeZone: "America/Los_Angeles",
-      }),
-      updatedAt: new Date().toLocaleString("en-US", {
-        timeZone: "America/Los_Angeles",
-      }),
     });
     if (review) {
-      let reviews = await Review.findAll({
-        where: { videoId: req.params.videoId },
-        include: User,
-      });
-      let reviewObj = {};
-      reviews = reviews.map((review) => {
-        reviewObj[review.dataValues.id] = review.dataValues;
-      });
-      return res.json({ reviewObj, reviewId: review.id });
+      // let reviews = await Review.findAll({
+      //   where: { videoId: req.params.videoId },
+      //   include: User,
+      // });
+      // let reviewObj = {};
+      // reviews = reviews.map((review) => {
+      //   reviewObj[review.dataValues.id] = review.dataValues;
+      // });
+      return res.json({ review });
     }
   })
 );
