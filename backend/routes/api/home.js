@@ -18,12 +18,14 @@ router.get(
         },
       ],
     });
+    const genres = await Genre.findAll();
     let videoObj = {};
     videos.map((video) => {
       videoObj[video.id] = video.dataValues;
     });
     return res.json({
       videoObj,
+      genres,
     });
   })
 );

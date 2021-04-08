@@ -77,3 +77,46 @@
   margin-right: 20px;
   color: #c7d5e0;
 }
+.searchBtnShell {
+  height: 34px;
+  width: 30px;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  border-radius: 4px;
+  transition: width 1s ease;
+  overflow: hidden;
+  background-color: #2a475e;
+  color: #66c0f4;
+  cursor: pointer;
+}
+.searchIcoShell:hover {
+  background-color: #66c0f4;
+  color: white;
+}
+.searchBtnShell.active {
+  width: 400px;
+}
+.searchBtnIcon {
+  margin-left: 3px;
+}
+.searchInputBox {
+  width: 91%;
+  height: 100%;
+  margin-left: 10px;
+  background-color: #2a475e;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+.searchIcoShell {
+  background-color: #2a475e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50px;
+  font-size: 25px;
+}

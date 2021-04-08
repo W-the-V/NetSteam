@@ -100,8 +100,6 @@ const FocusModal = () => {
     else dispatch(activateComment());
   };
   const onclick3 = (commentId) => {
-    console.log(commentId);
-    console.log(reviews);
     if (edit) return;
     document.getElementById(`${commentId}`)?.classList.add("hiddenComment");
     document
