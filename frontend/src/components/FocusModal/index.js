@@ -21,7 +21,7 @@ const FocusModal = () => {
   const focusId = useSelector((state) => state.modal.focus.id);
   let reviews = useSelector((state) => state.reviews);
   const userId = useSelector((state) => state.session.user.id);
-  let videos = useSelector((state) => state.videos);
+  let videos = useSelector((state) => state.home.videos);
   let videoOne = videos[focusId];
   const [edit, setEdit] = useState(false);
   reviews = Object.values(reviews).filter(
@@ -100,8 +100,6 @@ const FocusModal = () => {
     else dispatch(activateComment());
   };
   const onclick3 = (commentId) => {
-    console.log(commentId);
-    console.log(reviews);
     if (edit) return;
     document.getElementById(`${commentId}`)?.classList.add("hiddenComment");
     document

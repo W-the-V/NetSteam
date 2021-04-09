@@ -11,6 +11,7 @@
   outline: none;
   color: white;
   overflow: scroll;
+  z-index: 5;
 }
 .focusOuter {
   display: flex;
@@ -27,6 +28,7 @@
   margin-left: -50vw;
   margin-right: -50vw;
   outline: none;
+  z-index: 5;
 }
 .commentSectionShell {
   margin-top: 25px;

@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   session,
   modal: modalReducer,
   menu: menuReducer,
-  videos: videosReducer,
+  home: videosReducer,
   reviews: reviewReducer,
 });
 

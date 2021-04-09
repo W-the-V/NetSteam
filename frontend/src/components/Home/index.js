@@ -11,7 +11,7 @@ function Home() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [focusId, setFocusId] = useState("1");
-  let videos = useSelector((state) => state.videos);
+  let videos = useSelector((state) => state.home.videos);
   useEffect(() => {
     dispatch(getAllVideos());
   }, []);

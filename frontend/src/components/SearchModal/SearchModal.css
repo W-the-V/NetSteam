@@ -1,0 +1,71 @@
+.searchInner {
+  margin-top: 70px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background: #1b2838;
+  z-index: 1;
+}
+.searchOuter {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+}
+.searchOuterShell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchTopShell {
+  margin-top: 30px;
+  font-size: 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resultsText {
+  margin-left: -27px;
+  width: 90%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resultsShell {
+  width: 88%;
+  padding-left: 80px;
+}
+.searchCloseIco {
+  margin-left: -50px;
+  color: #66c0f4;
+  cursor: pointer;
+}
+.searchCloseIco:hover {
+  color: white;
+}
+.genreShell {
+  margin-top: 10px;
+  width: 85%;
+  height: 60px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.searchGenreBtn {
+  margin: 0;
+  margin-left: 10px;
+}
+.filterGenreText {
+  min-width: 150px;
+  font-size: 18px;
+  margin-left: 20px;
+}

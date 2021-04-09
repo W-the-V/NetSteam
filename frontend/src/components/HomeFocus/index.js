@@ -4,12 +4,13 @@ import { Redirect } from "react-router-dom";
 import Carousel from "../Carousel";
 import ReactPlayer from "react-player";
 import { setFocusModal } from "../../store/Modals";
+import { getVideoComments } from "../../store/reviews";
 import "./HomeFocus.css";
 
 function HomeFocus() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  let videos = useSelector((state) => state.videos);
+  let videos = useSelector((state) => state.home.videos);
   const [focusId, setFocusId] = useState("1");
   let videoOne = videos[focusId];
 
@@ -64,6 +65,7 @@ function HomeFocus() {
     score = videoScore();
   }, [focusId]);
   const onClick2 = (id) => {
+    dispatch(getVideoComments(id));
     dispatch(setFocusModal(id));
   };
   if (!sessionUser) {
