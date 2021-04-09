@@ -21,7 +21,7 @@ const FocusModal = () => {
   const focusId = useSelector((state) => state.modal.focus.id);
   let reviews = useSelector((state) => state.reviews);
   const userId = useSelector((state) => state.session.user.id);
-  let videos = useSelector((state) => state.videos);
+  let videos = useSelector((state) => state.home.videos);
   let videoOne = videos[focusId];
   const [edit, setEdit] = useState(false);
   reviews = Object.values(reviews).filter(

@@ -52,10 +52,20 @@
 .genreShell {
   margin-top: 10px;
   width: 85%;
-  height: 40px;
+  height: 60px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.searchGenreBtn {
+  margin: 0;
+  margin-left: 10px;
+}
+.filterGenreText {
+  min-width: 150px;
+  font-size: 18px;
+  margin-left: 20px;
 }

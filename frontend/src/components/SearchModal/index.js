@@ -29,9 +29,11 @@ function SearchModal({
     dispatch(setFocusModal(id));
     dispatch(getVideoComments(id));
   };
-  const videoState = useSelector((state) => state.videos);
+  const videoState = useSelector((state) => state.home.videos);
+  const genres = useSelector((state) => state.home.genres);
   const videos = Object.values(videoState);
   let [searchItems, setSearchItems] = useState([]);
+  let [activeGenres, setActiveGenres] = useState([]);
   useEffect(() => {
     let result = videos.filter(
       (video) =>
@@ -61,7 +63,16 @@ function SearchModal({
           <i class="fas fa-times searchCloseIco" onClick={onclick}></i>
         </div>
         <div className="genreShell">
-          Filter by Genre: <button className="genreButton">BUTTON</button>
+          <div className="filterGenreText">Filter by Genre:</div>
+          {genres?.map((genre) => {
+            return (
+              <>
+                <button className="genreButton searchGenreBtn">
+                  {genre.type}
+                </button>
+              </>
+            );
+          })}
         </div>
         <div className="resultsShell">
           {searchItems?.map((item) => (

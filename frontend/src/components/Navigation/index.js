@@ -20,7 +20,6 @@ function Navigation({ isLoaded }) {
   const [searchState, setSearchState] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const onclickSearch = () => {
-    console.log(searchTerm);
     if (!searchState) {
       document.querySelector(".searchBtnShell").classList.add("active");
       setSearchState(true);
@@ -75,7 +74,7 @@ function Navigation({ isLoaded }) {
               <input
                 type="text"
                 className="searchInputBox"
-                placeholder="Title, Genre"
+                placeholder="Search by title or genre"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               ></input>
