@@ -1,17 +1,17 @@
-.abtDropDownOuterShell {
+.dropDownOuterShell {
   z-index: 50;
   position: fixed;
-  left: 93%;
+  left: 87.5%;
   top: 6.2%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.abtUpCaret {
+.upCaret {
   font-size: 40px;
   margin-top: -10px;
 }
-.abtDropDownShell {
+.dropDownShell {
   margin-top: -8px;
   background-color: #171a21;
   color: white;
@@ -24,7 +24,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.abtDropDownBtn {
+.dropDownBtn {
   cursor: pointer;
   margin-top: 5px;
   margin-bottom: 5px;

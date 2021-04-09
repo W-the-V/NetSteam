@@ -214,7 +214,10 @@ const FocusModal = ({
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
-                        <div className="userProfileImg"></div>
+                        <img
+                          src={rev.User.ProfilePicture.imageLink}
+                          className="userProfileImg"
+                        ></img>
                         <div className="commentUserInfo">
                           <div className="commentUserName">
                             {rev?.User?.username}

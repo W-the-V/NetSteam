@@ -5,6 +5,8 @@ import SearchModal from "../SearchModal";
 
 import "./Navigation.css";
 import src from "../../images/logotext.png";
+import DropDown from "../DropDown";
+import DeveloperButton from "../DeveloperButton";
 import {
   activateLogin,
   deactivateLogin,
@@ -53,56 +55,65 @@ function Navigation({
     dispatch(deactivateLogin());
   };
   return (
-    <div className="navOuterShell">
-      {searchTerm && (
-        <SearchModal
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onclickSearch={onclickSearch}
-          searchState={searchState}
-          setSearchState={setSearchState}
-        />
-      )}
-      <div className="navBar">
-        <NavLink exact to="/" className="homeLink">
-          <button className="homeButton">
-            <img className="logoText" src={src} alt="Logo"></img>
-          </button>
-        </NavLink>
-        {sessionUser && (
-          <div className="rightNavShell">
-            <div className="searchBtnShell">
-              <div className="searchIcoShell" onClick={() => onclickSearch()}>
-                <i className="fas fa-search searchBtnIcon"></i>
+    <>
+      <div className="navOuterShell">
+        {searchTerm && (
+          <SearchModal
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            onclickSearch={onclickSearch}
+            searchState={searchState}
+            setSearchState={setSearchState}
+          />
+        )}
+        <div className="navBar">
+          <NavLink exact to="/" className="homeLink">
+            <button className="homeButton">
+              <img className="logoText" src={src} alt="Logo"></img>
+            </button>
+          </NavLink>
+          {sessionUser && (
+            <div className="rightNavShell">
+              <div className="searchBtnShell">
+                <div className="searchIcoShell" onClick={() => onclickSearch()}>
+                  <i className="fas fa-search searchBtnIcon"></i>
+                </div>
+                <input
+                  type="text"
+                  className="searchInputBox"
+                  placeholder="Search by title or genre"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                ></input>
               </div>
-              <input
-                type="text"
-                className="searchInputBox"
-                placeholder="Search by title or genre"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              ></input>
+              <div className="userNameShell">
+                <img
+                  src={sessionUser.ProfilePicture.imageLink}
+                  className="profilePictureNav"
+                ></img>
+                <i className="fas fa-caret-down downArrow"></i>
+              </div>
+              <button className="navButton" onClick={logout}>
+                About
+                <i className="fas fa-caret-down downArrow"></i>
+              </button>
             </div>
-            <div className="userNameShell">
-              <div className="navUserName">{sessionUser.email}</div>
+          )}
+          {!sessionUser && (
+            <div className="rightNavShell">
+              <button className="navButton" onClick={login}>
+                Login
+              </button>
+              <button className="navButton" onClick={demoLogin}>
+                Demo
+              </button>
             </div>
-            <button className="navButton" onClick={logout}>
-              Log Out
-            </button>
-          </div>
-        )}
-        {!sessionUser && (
-          <div className="rightNavShell">
-            <button className="navButton" onClick={login}>
-              Login
-            </button>
-            <button className="navButton" onClick={demoLogin}>
-              Demo
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+      <DropDown />
+      <DeveloperButton />
+    </>
   );
 }
 

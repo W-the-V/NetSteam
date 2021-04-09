@@ -26,7 +26,6 @@ router.get(
     videos.map((video) => {
       videoObj[video.id] = video.dataValues;
     });
-    console.log(genres);
     return res.json({
       videoObj,
       genres,

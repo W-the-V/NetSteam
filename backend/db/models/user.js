@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      profilePictureId: DataTypes.INTEGER,
     },
     {
       defaultScope: {
@@ -52,11 +53,12 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     User.hasMany(models.UserList, { foreignKey: "userId" });
     User.hasMany(models.Review, { foreignKey: "userId" });
+    User.belongsTo(models.ProfilePicture, { foreignKey: "profilePictureId" });
   };
   User.prototype.toSafeObject = function () {
     // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context will be the User instance
-    return { id, username, email };
+    const { id, username, email, profilePictureId } = this; // context will be the User instance
+    return { id, username, email, profilePictureId };
   };
 
   User.prototype.validatePassword = function (password) {

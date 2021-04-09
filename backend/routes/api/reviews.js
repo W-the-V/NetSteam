@@ -1,7 +1,13 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 
-const { User, Video, Review, Genre } = require("../../db/models");
+const {
+  User,
+  Video,
+  Review,
+  Genre,
+  ProfilePicture,
+} = require("../../db/models");
 
 const router = express.Router();
 
@@ -10,7 +16,12 @@ router.get(
   asyncHandler(async (req, res, next) => {
     let reviews = await Review.findAll({
       where: { videoId: req.params.videoId },
-      include: User,
+      include: [
+        {
+          model: User,
+          include: ProfilePicture,
+        },
+      ],
     });
     let reviewObj = {};
     reviews = reviews.map((review) => {
@@ -33,6 +44,12 @@ router.post(
       videoId,
     });
     if (review) {
+      const returnReview = await Review.findOne({
+        where: {
+          id: review.id,
+        },
+        include: ProfilePicture,
+      });
       // let reviews = await Review.findAll({
       //   where: { videoId: req.params.videoId },
       //   include: User,
@@ -41,7 +58,7 @@ router.post(
       // reviews = reviews.map((review) => {
       //   reviewObj[review.dataValues.id] = review.dataValues;
       // });
-      return res.json({ review });
+      if (returnReview) return res.json({ returnReview });
     }
   })
 );
