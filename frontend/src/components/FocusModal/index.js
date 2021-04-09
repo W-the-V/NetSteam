@@ -136,6 +136,7 @@ const FocusModal = ({
         <div className="homeFocusShell">
           <div className="focusTitleBox">
             <div className="focusTitle">{videoOne?.title}</div>
+            <i class="fas fa-times focusCloseIco" onClick={onclick}></i>
           </div>
           <div className="focusInnerShell">
             <div className="videoOuterShell">

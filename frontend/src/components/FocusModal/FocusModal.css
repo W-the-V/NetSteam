@@ -247,3 +247,12 @@
 .hiddenComment {
   display: none;
 }
+.focusCloseIco {
+  color: #66c0f4;
+  cursor: pointer;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.focusCloseIco:hover {
+  color: white;
+}
