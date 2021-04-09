@@ -10,7 +10,7 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
   const commentState = useSelector((state) => state.modal.comment);
   const userId = useSelector((state) => state.session.user.id);
   const focusId = useSelector((state) => state.modal.focus.id);
-  let videos = useSelector((state) => state.videos);
+  let videos = useSelector((state) => state.home.videos);
   let reviewOne = useSelector((state) => state.reviews);
   const [recommend, setRecommend] = useState(
     reviewOne[editId]?.recommended.toString()

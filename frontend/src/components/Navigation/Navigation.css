@@ -63,10 +63,7 @@
   cursor: pointer;
   border-radius: 4px;
 }
-.navButton:hover {
-  background-color: #66c0f4;
-  color: white;
-}
+
 .rightNavShell {
   height: 100%;
   display: flex;
@@ -141,11 +138,30 @@
   margin-left: 7px;
   transition: transform 0.4s ease;
 }
-.userNameShell:hover {
+.navButton.active {
   background-color: #66c0f4;
   color: white;
 }
 
-.userNameShell:hover .downArrow {
+.navButton.active .downArrow {
   transform: rotate(180deg);
+}
+.userNameShell.active {
+  background-color: #66c0f4;
+  color: white;
+}
+
+.userNameShell.active .downArrow {
+  transform: rotate(180deg);
+}
+
+.dropDownOuterMostShell {
+  z-index: 60;
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
 }

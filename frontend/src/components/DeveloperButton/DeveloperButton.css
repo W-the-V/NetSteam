@@ -1,18 +1,24 @@
 .abtDropDownOuterShell {
-  z-index: 50;
+  /* z-index: 5;
   position: fixed;
   left: 93%;
-  top: 6.2%;
+  top: 6.2%; */
+  margin-right: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+  pointer-events: auto;
 }
 .abtUpCaret {
+  margin-bottom: 4px;
   font-size: 40px;
-  margin-top: -10px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .abtDropDownShell {
-  margin-top: -8px;
   background-color: #171a21;
   color: white;
   width: 90px;
@@ -25,7 +31,15 @@
   padding-bottom: 5px;
 }
 .abtDropDownBtn {
+  z-index: 7;
   cursor: pointer;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.dropDownBtn:hover {
+  text-decoration: underline;
+}
+.aboutLink {
+  text-decoration: none;
+  color: white;
 }

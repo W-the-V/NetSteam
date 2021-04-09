@@ -16,6 +16,7 @@ export const deleteReview = (reviewId) => {
   };
 };
 export const addReview = (review) => {
+  console.log(review);
   return {
     type: ADD_REVIEW,
     payload: review,
@@ -38,7 +39,7 @@ export const postComment = (
     method: "POST",
     body: JSON.stringify({ recommend, score, commentText, userId }),
   });
-  dispatch(addReview(res.data.review));
+  dispatch(addReview(res.data.returnReview));
   return res.data.review;
 };
 

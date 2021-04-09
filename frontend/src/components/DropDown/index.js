@@ -8,8 +8,17 @@ const DropDown = () => {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
+  const devHover = () => {
+    document
+      .querySelector(".dropDownOuterShell")
+      .classList.add("hiddenComment");
+    document.querySelector(".userNameShell").classList.remove("active");
+  };
   return (
-    <div className="dropDownOuterShell">
+    <div
+      className="dropDownOuterShell hiddenComment"
+      onMouseLeave={() => devHover()}
+    >
       <i className="fas fa-caret-up upCaret"></i>
       <div className="dropDownShell">
         <div className="dropDownBtn">Profile</div>

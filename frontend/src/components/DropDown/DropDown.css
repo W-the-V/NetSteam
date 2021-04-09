@@ -1,18 +1,24 @@
 .dropDownOuterShell {
-  z-index: 50;
+  /* z-index: 50;
   position: fixed;
   left: 87.5%;
-  top: 6.2%;
+  top: 6.2%; */
+  margin-right: 157px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+  pointer-events: auto;
 }
 .upCaret {
+  margin-bottom: 4px;
   font-size: 40px;
-  margin-top: -10px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .dropDownShell {
-  margin-top: -8px;
   background-color: #171a21;
   color: white;
   width: 90px;

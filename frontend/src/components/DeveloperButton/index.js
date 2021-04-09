@@ -1,17 +1,37 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import "./DeveloperButton.css";
-import { changeDeveloper } from "../../store/showMenu";
 function DeveloperButton() {
-  const dispatch = useDispatch();
-  const devState = useSelector((state) => state.menu.developer);
+  const devHover = () => {
+    document
+      .querySelector(".abtDropDownOuterShell")
+      .classList.add("hiddenComment");
+    document.querySelector(".navButton").classList.remove("active");
+  };
 
   return (
-    <div className="abtDropDownOuterShell">
+    <div
+      className="abtDropDownOuterShell hiddenComment"
+      onMouseLeave={() => devHover()}
+    >
       <i className="fas fa-caret-up abtUpCaret"></i>
       <div className="abtDropDownShell">
-        <div className="dropDownBtn">Profile</div>
-        <div className="dropDownBtn">Log Out</div>
+        <div className="dropDownBtn">
+          <a
+            className="aboutLink"
+            target="_blank"
+            href="https://github.com/W-the-V/NetSteam"
+          >
+            GitHub
+          </a>
+        </div>
+        <div className="dropDownBtn">
+          <a
+            className="aboutLink"
+            target="_blank"
+            href="https://www.linkedin.com/in/walter-hills-a52535205/"
+          >
+            LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -13,6 +13,8 @@ import {
   activateSignUp,
   deactivateSignUp,
 } from "../../store/Modals";
+
+import { changeProfile, changeDeveloper } from "../../store/showMenu";
 import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
@@ -25,6 +27,7 @@ function Navigation({
 }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+
   const onclickSearch = () => {
     if (!searchState) {
       document.querySelector(".searchBtnShell").classList.add("active");
@@ -53,6 +56,38 @@ function Navigation({
     );
     dispatch(deactivateSignUp());
     dispatch(deactivateLogin());
+  };
+  const profileHover = () => {
+    if (
+      !document
+        .querySelector(".abtDropDownOuterShell")
+        .classList.contains("hidden")
+    ) {
+      document
+        .querySelector(".abtDropDownOuterShell")
+        .classList.add("hiddenComment");
+      document.querySelector(".navButton").classList.remove("active");
+    }
+    document
+      .querySelector(".dropDownOuterShell")
+      .classList.remove("hiddenComment");
+    document.querySelector(".userNameShell").classList.add("active");
+  };
+  const devHover = () => {
+    if (
+      !document
+        .querySelector(".dropDownOuterShell")
+        .classList.contains("hiddenComment")
+    ) {
+      document
+        .querySelector(".dropDownOuterShell")
+        .classList.add("hiddenComment");
+      document.querySelector(".userNameShell").classList.remove("active");
+    }
+    document
+      .querySelector(".abtDropDownOuterShell")
+      .classList.remove("hiddenComment");
+    document.querySelector(".navButton").classList.add("active");
   };
   return (
     <>
@@ -86,14 +121,17 @@ function Navigation({
                   onChange={(e) => setSearchTerm(e.target.value)}
                 ></input>
               </div>
-              <div className="userNameShell">
+              <div
+                className="userNameShell"
+                onMouseEnter={() => profileHover()}
+              >
                 <img
                   src={sessionUser.ProfilePicture.imageLink}
                   className="profilePictureNav"
                 ></img>
                 <i className="fas fa-caret-down downArrow"></i>
               </div>
-              <button className="navButton" onClick={logout}>
+              <button className="navButton" onMouseEnter={() => devHover()}>
                 About
                 <i className="fas fa-caret-down downArrow"></i>
               </button>
@@ -111,8 +149,10 @@ function Navigation({
           )}
         </div>
       </div>
-      <DropDown />
-      <DeveloperButton />
+      <div className="dropDownOuterMostShell">
+        <DropDown />
+        <DeveloperButton />
+      </div>
     </>
   );
 }
