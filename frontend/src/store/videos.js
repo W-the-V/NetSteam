@@ -7,19 +7,19 @@ export const setVideos = (videos) => {
     payload: videos,
   };
 };
-export const setGenres = (genres) => {
-  return {
-    type: GET_GENRES,
-    payload: genres,
-  };
-};
+// export const setGenres = (genres) => {
+//   return {
+//     type: GET_GENRES,
+//     payload: genres,
+//   };
+// };
 
 export const getAllVideos = () => async (dispatch) => {
   let res = await fetch("/api/home");
   res = await res.json();
   dispatch(setVideos(res.videoObj));
-  console.log(res.genres);
-  dispatch(setGenres(res.genres));
+  // console.log(res.genres);
+  // dispatch(setGenres(res.genres));
   return res;
 };
 

@@ -7,13 +7,17 @@ import { setFocusModal } from "../../store/Modals";
 import { getVideoComments } from "../../store/reviews";
 import "./HomeFocus.css";
 
-function HomeFocus() {
+function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   let videos = useSelector((state) => state.home.videos);
   const [focusId, setFocusId] = useState("1");
   let videoOne = videos[focusId];
 
+  const genreClick = (genre) => {
+    setSearchTerm(genre);
+    setSearchState(true);
+  };
   let videoScore = () => {
     let returnScore = 0;
     let returnCount = 0;
@@ -112,7 +116,12 @@ function HomeFocus() {
                 <div className="reviewData">{videoOne?.releaseDate}</div>
                 <div className="reviewData">{videoOne?.developer}</div>
                 <div className="reviewData">{videoOne?.publisher}</div>
-                <button className="genreButton">{videoOne?.Genre.type}</button>
+                <button
+                  className="genreButton"
+                  onClick={() => genreClick(videoOne.Genre.type)}
+                >
+                  {videoOne?.Genre.type}
+                </button>
                 <div className="focusButtonShell">
                   <div
                     className="modalFooterText"

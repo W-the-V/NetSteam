@@ -2,23 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
-import {
-  deactivateSignUp,
-  deactivateLogin,
-  activateLogin,
-} from "../../store/Modals";
-import { getAllVideos } from "../../store/videos";
 import { setFocusModal } from "../../store/Modals";
 import { getVideoComments } from "../../store/reviews";
-import * as sessionActions from "../../store/session";
 import "./SearchModal.css";
 
 function SearchModal({
   searchTerm,
   setSearchTerm,
+  onclickSearch,
   searchState,
   setSearchState,
-  onclickSearch,
 }) {
   const dispatch = useDispatch();
   const onclick = () => {
@@ -30,11 +23,14 @@ function SearchModal({
     dispatch(getVideoComments(id));
   };
   const videoState = useSelector((state) => state.home.videos);
-  const genres = useSelector((state) => state.home.genres);
   const videos = Object.values(videoState);
   let [searchItems, setSearchItems] = useState([]);
-  let [activeGenres, setActiveGenres] = useState([]);
   useEffect(() => {
+    if (
+      !document.querySelector(".searchBtnShell").classList.contains("active")
+    ) {
+      document.querySelector(".searchBtnShell").classList.add("active");
+    }
     let result = videos.filter(
       (video) =>
         video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -58,21 +54,9 @@ function SearchModal({
               {`${searchItems.length} results found for "${searchTerm}"`}
             </div>
           ) : (
-            <div className="resultsText">0 Results</div>
+            <div className="resultsText">{`0 Results for "${searchTerm}"`}</div>
           )}
           <i class="fas fa-times searchCloseIco" onClick={onclick}></i>
-        </div>
-        <div className="genreShell">
-          <div className="filterGenreText">Filter by Genre:</div>
-          {genres?.map((genre) => {
-            return (
-              <>
-                <button className="genreButton searchGenreBtn">
-                  {genre.type}
-                </button>
-              </>
-            );
-          })}
         </div>
         <div className="resultsShell">
           {searchItems?.map((item) => (

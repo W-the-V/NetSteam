@@ -14,7 +14,12 @@ import "./FocusModal.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
-const FocusModal = () => {
+const FocusModal = ({
+  searchTerm,
+  setSearchTerm,
+  searchState,
+  setSearchState,
+}) => {
   const dispatch = useDispatch();
   const commentState = useSelector((state) => state.modal.comment);
   const focusState = useSelector((state) => state.modal.focus.status);
@@ -28,7 +33,12 @@ const FocusModal = () => {
     (review) => review.videoId === focusId
   );
   // .sort((a, b) => a.updatedAt < b.updatedAt);
-
+  const genreClick = (genre) => {
+    setEdit(false);
+    dispatch(deactivateFocus());
+    setSearchTerm(genre);
+    setSearchState(true);
+  };
   const getDate = (date) => {
     date = date.split("-");
     let day = date[2].split("");
@@ -164,7 +174,10 @@ const FocusModal = () => {
                   <div className="reviewData">{videoOne?.releaseDate}</div>
                   <div className="reviewData">{videoOne?.developer}</div>
                   <div className="reviewData">{videoOne?.publisher}</div>
-                  <button className="genreButton">
+                  <button
+                    className="genreButton"
+                    onClick={() => genreClick(videoOne.Genre.type)}
+                  >
                     {videoOne?.Genre.type}
                   </button>
                 </div>

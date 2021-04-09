@@ -7,7 +7,7 @@ import Carousel from "../Carousel";
 import FocusModal from "../FocusModal";
 import { getAllVideos } from "../../store/videos";
 
-function Home() {
+function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [focusId, setFocusId] = useState("1");
@@ -20,8 +20,18 @@ function Home() {
   }
   return (
     <div className="homeOuterShell">
-      <FocusModal />
-      <HomeFocus />
+      <FocusModal
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        searchState={searchState}
+        setSearchState={setSearchState}
+      />
+      <HomeFocus
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        searchState={searchState}
+        setSearchState={setSearchState}
+      />
       <Carousel
         title={"New"}
         videos={videos}

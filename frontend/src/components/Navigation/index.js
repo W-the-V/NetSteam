@@ -14,11 +14,15 @@ import {
 import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
-function Navigation({ isLoaded }) {
+function Navigation({
+  isLoaded,
+  searchTerm,
+  setSearchTerm,
+  searchState,
+  setSearchState,
+}) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [searchState, setSearchState] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const onclickSearch = () => {
     if (!searchState) {
       document.querySelector(".searchBtnShell").classList.add("active");
@@ -54,9 +58,9 @@ function Navigation({ isLoaded }) {
         <SearchModal
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          onclickSearch={onclickSearch}
           searchState={searchState}
           setSearchState={setSearchState}
-          onclickSearch={onclickSearch}
         />
       )}
       <div className="navBar">
