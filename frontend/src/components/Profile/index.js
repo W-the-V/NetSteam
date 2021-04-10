@@ -12,10 +12,8 @@ function Profile({}) {
   const sessionUser = useSelector((state) => state.session.user);
   const pictures = useSelector((state) => state.profile.pictures);
   const [userName, setUsername] = useState(sessionUser.username);
-  const [pictureId, setPictureId] = useState(sessionUser.ProfilePicture.id);
-  const [profilePicture, setProfilePicture] = useState(
-    sessionUser.ProfilePicture.imageLink
-  );
+  const [pictureId, setPictureId] = useState();
+  const [profilePicture, setProfilePicture] = useState();
   const onclick = () => {
     dispatch(deactivateProfile());
   };
@@ -27,9 +25,10 @@ function Profile({}) {
     dispatch(deactivateProfile());
   };
 
-  // useEffect(() => {
-
-  // }, [profilePicture]);
+  useEffect(() => {
+    setPictureId(sessionUser.profilePictureId);
+    setProfilePicture(pictures[sessionUser.profilePictureId]?.imageLink);
+  }, [pictures]);
 
   const onPictureClick = (id) => {
     if (pictureId) {

@@ -39,6 +39,14 @@ function Navigation({
       setSearchState(false);
     }
   };
+  const onhoverSearch = () => {
+    if (
+      !document.querySelector(".searchBtnShell").classList.contains("active")
+    ) {
+      document.querySelector(".searchBtnShell").classList.add("active");
+      setSearchState(true);
+    }
+  };
   const logout = (e) => {
     e.preventDefault();
     dispatch(deactivateLogin());
@@ -113,13 +121,17 @@ function Navigation({
           {sessionUser && (
             <div className="rightNavShell">
               <div className="searchBtnShell">
-                <div className="searchIcoShell" onClick={() => onclickSearch()}>
+                <div
+                  className="searchIcoShell"
+                  onClick={() => onclickSearch()}
+                  onMouseEnter={onhoverSearch}
+                >
                   <i className="fas fa-search searchBtnIcon"></i>
                 </div>
                 <input
                   type="text"
                   className="searchInputBox"
-                  placeholder="Search by title or genre"
+                  placeholder="Type to search by title or genre"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 ></input>

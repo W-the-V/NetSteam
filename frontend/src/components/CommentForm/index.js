@@ -37,7 +37,7 @@ const CommentModal = ({
       return setEdit(false);
     } else {
       const res = await dispatch(
-        postComment(recommend, score, commentText, focusId, userId)
+        postComment(recommend, score, commentText, userId, focusId)
       );
       dispatch(deactivateComment());
     }

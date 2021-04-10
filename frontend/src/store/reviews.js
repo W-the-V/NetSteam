@@ -16,7 +16,6 @@ export const deleteReview = (reviewId) => {
   };
 };
 export const addReview = (review) => {
-  console.log(review);
   return {
     type: ADD_REVIEW,
     payload: review,

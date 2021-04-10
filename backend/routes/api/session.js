@@ -58,7 +58,6 @@ router.post(
     user.username = info.username;
     user.profilePictureId = info.profilePictureId;
     await user.save();
-    console.log(user);
     return res.json({ user });
   })
 );
@@ -77,12 +76,6 @@ router.get(
     let { user } = req;
     if (user) {
       user = user.toSafeObject();
-      oldUser = user;
-      user = await User.findOne({
-        where: { id: user.id },
-        include: ProfilePicture,
-      });
-      user["email"] = oldUser.email;
       return res.json({
         user,
       });

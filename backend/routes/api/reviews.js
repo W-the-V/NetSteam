@@ -35,6 +35,7 @@ router.get(
 router.post("/video/:videoId", async (req, res) => {
   const videoId = req.params.videoId;
   const { recommend, score, commentText, userId } = req.body;
+  console.log(userId);
   const review = await Review.create({
     score,
     recommended: recommend,
