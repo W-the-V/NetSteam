@@ -20,7 +20,11 @@ function Profile({}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await dispatch(
-      edit(sessionUser.id, { username: userName, profilePictureId: pictureId })
+      edit(
+        sessionUser.id,
+        { username: userName, profilePictureId: pictureId },
+        sessionUser.username
+      )
     );
     dispatch(deactivateProfile());
   };

@@ -27,12 +27,11 @@ export const login = ({ credential, password }) => async (dispatch) => {
   return res;
 };
 
-export const edit = (id, info) => async (dispatch) => {
+export const edit = (id, info, username) => async (dispatch) => {
   const res = await fetch("/api/session/edit", {
     method: "POST",
-    body: JSON.stringify({ id, info }),
+    body: JSON.stringify({ id, info, username }),
   });
-  console.log(res.data.user);
   dispatch(setUser(res.data.user));
   return res;
 };

@@ -18,6 +18,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        type: "Multiplayer",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "RPG",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Strategy",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+
     ]);
   },
 
