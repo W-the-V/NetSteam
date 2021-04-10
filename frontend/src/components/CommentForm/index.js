@@ -5,20 +5,24 @@ import { deactivateComment } from "../../store/Modals";
 import { postComment, editComment } from "../../store/reviews";
 import "./CommentForm.css";
 
-const CommentModal = ({ hidden, editId, edit, setEdit }) => {
+const CommentModal = ({
+  hidden,
+  editId,
+  edit,
+  setEdit,
+  recommend,
+  setRecommend,
+  commentText,
+  setCommentText,
+  score,
+  setScore,
+}) => {
   const dispatch = useDispatch();
   const commentState = useSelector((state) => state.modal.comment);
   const userId = useSelector((state) => state.session.user.id);
   const focusId = useSelector((state) => state.modal.focus.id);
   let videos = useSelector((state) => state.home.videos);
-  let reviewOne = useSelector((state) => state.reviews);
-  const [recommend, setRecommend] = useState(
-    reviewOne[editId]?.recommended.toString()
-      ? reviewOne[editId]?.recommended
-      : true
-  );
-  const [commentText, setCommentText] = useState(reviewOne[editId]?.body);
-  const [score, setScore] = useState(reviewOne[editId]?.score);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (edit) {
@@ -35,10 +39,6 @@ const CommentModal = ({ hidden, editId, edit, setEdit }) => {
       const res = await dispatch(
         postComment(recommend, score, commentText, focusId, userId)
       );
-      // console.log(res);
-      // console.log(await reviewOne);
-      // setRecommend(reviewOne[res].recommend);
-      // reviewOne.forceUpdate();
       dispatch(deactivateComment());
     }
   };

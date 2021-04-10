@@ -18,7 +18,16 @@ function DeveloperButton() {
           <a
             className="aboutLink"
             target="_blank"
-            href="https://github.com/W-the-V/NetSteam"
+            href="https://github.com/W-the-V/NetSteam/wiki"
+          >
+            Wiki
+          </a>
+        </div>
+        <div className="dropDownBtn">
+          <a
+            className="aboutLink"
+            target="_blank"
+            href="https://github.com/W-the-V"
           >
             GitHub
           </a>

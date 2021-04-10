@@ -28,17 +28,21 @@ const FocusModal = ({
   const userId = useSelector((state) => state.session.user.id);
   let videos = useSelector((state) => state.home.videos);
   let videoOne = videos[focusId];
+  let reviewOne = useSelector((state) => state.reviews);
+  const [recommend, setRecommend] = useState(true);
+  const [commentText, setCommentText] = useState("");
+  const [score, setScore] = useState();
   const [edit, setEdit] = useState(false);
-  reviews = Object.values(reviews).filter(
-    (review) => review.videoId === focusId
-  );
-  // .sort((a, b) => a.updatedAt < b.updatedAt);
+  reviews = Object.values(reviews)
+    .filter((review) => review.videoId === focusId)
+    .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
   const genreClick = (genre) => {
     setEdit(false);
     dispatch(deactivateFocus());
     setSearchTerm(genre);
     setSearchState(true);
   };
+  //dayjs npm package
   const getDate = (date) => {
     date = date.split("-");
     let day = date[2].split("");
@@ -99,7 +103,7 @@ const FocusModal = ({
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
-  let score = videoScore();
+  let totalScore = videoScore();
   const onclick = () => {
     setEdit(false);
     dispatch(deactivateFocus());
@@ -107,7 +111,12 @@ const FocusModal = ({
   const onclick2 = () => {
     if (edit) return;
     if (commentState) dispatch(deactivateComment());
-    else dispatch(activateComment());
+    else {
+      setRecommend(true);
+      setCommentText();
+      setScore();
+      dispatch(activateComment());
+    }
   };
   const onclick3 = (commentId) => {
     if (edit) return;
@@ -118,6 +127,10 @@ const FocusModal = ({
     document
       .getElementById(`edit${commentId}`)
       ?.classList.add("commentInnerShell");
+    console.log(reviewOne[commentId]);
+    setRecommend(reviewOne[commentId].recommended);
+    setCommentText(reviewOne[commentId].body);
+    setScore(reviewOne[commentId].score);
     setEdit(true);
   };
   const onclick4 = async (editId, userId) => {
@@ -165,10 +178,10 @@ const FocusModal = ({
                 </div>
                 <div className="reviewDataBox">
                   <div className="reviewData">
-                    {score?.score}
-                    {score?.score !== "No Reviews Yet" ? (
+                    {totalScore?.score}
+                    {totalScore?.score !== "No Reviews Yet" ? (
                       <div className="totalReviewText">
-                        ({score?.total} Reviews)
+                        ({totalScore?.total} Reviews)
                       </div>
                     ) : null}
                   </div>
@@ -191,10 +204,10 @@ const FocusModal = ({
             <div className="commentTopLeft">
               <div className="topText">Overall Reviews: </div>
               <div className="bottomText">
-                {score?.score}
-                {score?.score !== "No Reviews Yet" ? (
+                {totalScore?.score}
+                {totalScore?.score !== "No Reviews Yet" ? (
                   <div className="totalReviewText">
-                    ({score?.total} Reviews)
+                    ({totalScore?.total} Reviews)
                   </div>
                 ) : null}
               </div>
@@ -209,7 +222,16 @@ const FocusModal = ({
                 </button>
               </div>
               <div className="commentLeftShell">
-                {commentState && <CommentModal />}
+                {commentState && (
+                  <CommentModal
+                    recommend={recommend}
+                    setRecommend={setRecommend}
+                    commentText={commentText}
+                    setCommentText={setCommentText}
+                    score={score}
+                    setScore={setScore}
+                  />
+                )}
                 {reviews.map((rev) => (
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
@@ -280,6 +302,12 @@ const FocusModal = ({
                       prevScore={rev?.score}
                       edit={edit}
                       setEdit={setEdit}
+                      recommend={recommend}
+                      setRecommend={setRecommend}
+                      commentText={commentText}
+                      setCommentText={setCommentText}
+                      score={score}
+                      setScore={setScore}
                     />
                   </div>
                 ))}

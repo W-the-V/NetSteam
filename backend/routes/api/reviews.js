@@ -22,6 +22,7 @@ router.get(
           include: ProfilePicture,
         },
       ],
+      order: [["createdAt", "DESC"]],
     });
     let reviewObj = {};
     reviews = reviews.map((review) => {
@@ -84,6 +85,7 @@ router.post(
     reviews = reviews.map((review) => {
       reviewObj[review.dataValues.id] = review.dataValues;
     });
+
     return res.json({ reviewObj });
   })
 );
