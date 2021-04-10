@@ -135,6 +135,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
   cursor: pointer;
   font-size: 20px;
 }
@@ -161,14 +162,15 @@
 
 .dropDownOuterMostShell {
   z-index: 60;
-  left: 70.4%;
-  width: 30%;
+  width: 100%;
+  min-width: 800px;
   position: fixed;
-  top: 60px;
-  height: 120px;
+  top: 0px;
+  height: 200px;
   display: flex;
   justify-content: flex-end;
   pointer-events: none;
+  /* background-color: red; */
 }
 .navButton:hover {
   color: white;

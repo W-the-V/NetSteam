@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   activateProfile,
@@ -20,6 +20,10 @@ const DropDown = ({
     document
       .querySelector(".dropDownOuterShell")
       .classList.add("hiddenComment");
+    setSearchTerm("");
+    if (searchState) onclickSearch();
+    dispatch(deactivateProfile());
+    dispatch(deactivateFocus());
     dispatch(sessionActions.logout());
   };
   const devHover = () => {

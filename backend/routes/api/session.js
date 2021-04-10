@@ -19,6 +19,15 @@ const validateLogin = [
   handleValidationErrors,
 ];
 
+const validateEdit = [
+  check("username")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 4 })
+    .withMessage("Please provide a username with at least 4 characters."),
+  check("username").not().isEmail().withMessage("Username cannot be an email."),
+  handleValidationErrors,
+];
+
 // Log in
 router.post(
   "/",
@@ -51,10 +60,11 @@ router.post(
 router.post(
   "/edit",
   asyncHandler(async (req, res, next) => {
-    const { id, info } = req.body;
+    const { id, info, username } = req.body;
     user = await User.findOne({
       where: id,
     });
+
     user.username = info.username;
     user.profilePictureId = info.profilePictureId;
     await user.save();

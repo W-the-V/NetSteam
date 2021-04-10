@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
-import { activateProfile, deactivateProfile } from "../../store/Modals";
+import { deactivateProfile } from "../../store/Modals";
 import { edit } from "../../store/session";
 import "./Profile.css";
 
@@ -20,7 +20,11 @@ function Profile({}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await dispatch(
-      edit(sessionUser.id, { username: userName, profilePictureId: pictureId })
+      edit(
+        sessionUser.id,
+        { username: userName, profilePictureId: pictureId },
+        sessionUser.username
+      )
     );
     dispatch(deactivateProfile());
   };

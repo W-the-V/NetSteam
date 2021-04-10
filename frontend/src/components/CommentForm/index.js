@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deactivateComment } from "../../store/Modals";
 import { postComment, editComment } from "../../store/reviews";
@@ -18,10 +17,8 @@ const CommentModal = ({
   setScore,
 }) => {
   const dispatch = useDispatch();
-  const commentState = useSelector((state) => state.modal.comment);
   const userId = useSelector((state) => state.session.user.id);
   const focusId = useSelector((state) => state.modal.focus.id);
-  let videos = useSelector((state) => state.home.videos);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +33,7 @@ const CommentModal = ({
       document.getElementById(`${editId}`).classList.remove("hiddenComment");
       return setEdit(false);
     } else {
-      const res = await dispatch(
+      await dispatch(
         postComment(recommend, score, commentText, userId, focusId)
       );
       dispatch(deactivateComment());

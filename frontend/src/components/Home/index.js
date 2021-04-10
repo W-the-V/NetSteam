@@ -14,6 +14,7 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [focusId, setFocusId] = useState("1");
   let videos = useSelector((state) => state.home.videos);
+  let genres = useSelector((state) => state.home.genres);
   useEffect(() => {
     dispatch(getAllVideos());
     dispatch(getPictures());
@@ -36,14 +37,17 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
         searchState={searchState}
         setSearchState={setSearchState}
       />
-      <Carousel
-        title={"New"}
-        videos={videos}
-        focusId={focusId}
-        setFocusId={setFocusId}
-        videos={videos}
-      />
-      <Carousel />
+      {genres &&
+        genres?.map((genre) => (
+          <Carousel
+            title={genre?.type}
+            videos={Object.values(videos).filter(
+              (video) => video.genreId === genre?.id
+            )}
+            focusId={focusId}
+            setFocusId={setFocusId}
+          />
+        ))}
     </div>
   );
 }

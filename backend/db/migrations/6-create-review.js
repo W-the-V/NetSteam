@@ -19,6 +19,7 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Users" },
       },
       body: {
         allowNull: false,
@@ -27,6 +28,7 @@ module.exports = {
       videoId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: { model: "Videos" },
       },
       createdAt: {
         allowNull: false,

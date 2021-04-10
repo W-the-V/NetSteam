@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import ReactPlayer from "react-player";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,7 +53,7 @@ const FocusModal = ({
     if (time[0] > 12) {
       time[0] = time[0] - 12;
       time[1] += "pm";
-    } else if (time[1] == 12) time[1] += "pm";
+    } else if (time[1] === 12) time[1] += "pm";
     else time[1] += "am";
     time = time.join(":");
     day = day[0] + day[1];
@@ -144,7 +144,11 @@ const FocusModal = ({
               />
             </div>
             <div className="focusAboutShell" id="focusModalAboutShell">
-              <img className="gameImg" src={videoOne?.imageURL}></img>
+              <img
+                className="gameImg"
+                alt={`${videoOne?.title}`}
+                src={videoOne?.imageURL}
+              ></img>
               <div className="aboutVideoText" id="focusModalAboutText">
                 {videoOne?.about}
               </div>
@@ -217,6 +221,7 @@ const FocusModal = ({
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
                         <img
+                          alt="profilePicture"
                           src={pictures[rev.User.profilePictureId].imageLink}
                           className="userProfileImg"
                         ></img>
@@ -254,7 +259,7 @@ const FocusModal = ({
                         </div>
                         <div
                           className={
-                            userId == rev?.userId
+                            userId === rev?.userId
                               ? "commentBtnShell"
                               : "commentBtnShell hiddenComment"
                           }

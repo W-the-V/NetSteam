@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import SearchModal from "../SearchModal";
@@ -10,8 +9,9 @@ import DeveloperButton from "../DeveloperButton";
 import {
   activateLogin,
   deactivateLogin,
-  activateSignUp,
   deactivateSignUp,
+  deactivateProfile,
+  deactivateFocus,
 } from "../../store/Modals";
 
 import { changeProfile, changeDeveloper } from "../../store/showMenu";
@@ -38,20 +38,6 @@ function Navigation({
       document.querySelector(".searchBtnShell").classList.remove("active");
       setSearchState(false);
     }
-  };
-  const onhoverSearch = () => {
-    if (
-      !document.querySelector(".searchBtnShell").classList.contains("active")
-    ) {
-      document.querySelector(".searchBtnShell").classList.add("active");
-      setSearchState(true);
-    }
-  };
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(deactivateLogin());
-    dispatch(deactivateSignUp());
-    dispatch(sessionActions.logout());
   };
   const login = () => {
     dispatch(deactivateSignUp());
@@ -99,6 +85,12 @@ function Navigation({
       .classList.remove("hiddenComment");
     document.querySelector(".navButton").classList.add("active");
   };
+  const homeClick = () => {
+    setSearchTerm("");
+    if (searchState) onclickSearch();
+    dispatch(deactivateProfile());
+    dispatch(deactivateFocus());
+  };
 
   return (
     <>
@@ -114,18 +106,14 @@ function Navigation({
         )}
         <div className="navBar">
           <NavLink exact to="/" className="homeLink">
-            <button className="homeButton">
+            <button className="homeButton" onClick={homeClick}>
               <img className="logoText" src={src} alt="Logo"></img>
             </button>
           </NavLink>
           {sessionUser && (
             <div className="rightNavShell">
               <div className="searchBtnShell">
-                <div
-                  className="searchIcoShell"
-                  onClick={() => onclickSearch()}
-                  onMouseEnter={onhoverSearch}
-                >
+                <div className="searchIcoShell" onClick={() => onclickSearch()}>
                   <i className="fas fa-search searchBtnIcon"></i>
                 </div>
                 <input

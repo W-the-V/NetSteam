@@ -33,7 +33,7 @@
 .carousel__inner-slide {
   top: 130px;
   width: 100%;
-  padding-left: 60px;
+  padding-left: 45px;
 }
 .slide {
   width: 18%;
@@ -48,7 +48,6 @@
 }
 .carouselSlide {
   width: 100vw;
-  margin-left: -10px;
 }
 .slide:hover {
   transform: scale3d(1.3, 1.3, 1.3);
