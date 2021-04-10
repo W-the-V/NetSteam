@@ -41,7 +41,6 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
         videos={videos}
         focusId={focusId}
         setFocusId={setFocusId}
-        videos={videos}
       />
       <Carousel />
     </div>

@@ -3,7 +3,8 @@
   position: fixed;
   left: 93%;
   top: 6.2%; */
-  margin-right: 30px;
+  /* background-color: red; */
+  width: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +12,7 @@
   pointer-events: auto;
 }
 .abtUpCaret {
+  margin-top: 47%;
   margin-bottom: 4px;
   font-size: 40px;
   height: 20px;

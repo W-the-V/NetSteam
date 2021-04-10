@@ -6,7 +6,6 @@ import {
   deactivateLogin,
   deactivateSignUp,
 } from "../../store/Modals";
-import { getAllVideos } from "../../store/videos";
 import * as sessionActions from "../../store/session";
 
 Modal.setAppElement(document.getElementById("root"));

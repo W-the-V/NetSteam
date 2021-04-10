@@ -18,6 +18,7 @@ function DeveloperButton() {
           <a
             className="aboutLink"
             target="_blank"
+            rel="noreferrer"
             href="https://github.com/W-the-V/NetSteam/wiki"
           >
             Wiki
@@ -27,6 +28,7 @@ function DeveloperButton() {
           <a
             className="aboutLink"
             target="_blank"
+            rel="noreferrer"
             href="https://github.com/W-the-V"
           >
             GitHub
@@ -36,6 +38,7 @@ function DeveloperButton() {
           <a
             className="aboutLink"
             target="_blank"
+            rel="noreferrer"
             href="https://www.linkedin.com/in/walter-hills-a52535205/"
           >
             LinkedIn

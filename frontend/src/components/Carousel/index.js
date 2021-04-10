@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
 import {
   CarouselProvider,
   Slider,
@@ -37,6 +36,7 @@ function Carousel({ title, focusId, setFocusId, videos }) {
         slides.push(
           <img
             className="slide"
+            alt={`slide${slideCount}`}
             src={videos[slideTotal]?.imageURL}
             onClick={() => onClick2(videos[currentSlide]?.id)}
             onMouseEnter={
