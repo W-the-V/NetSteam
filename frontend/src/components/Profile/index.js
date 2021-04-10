@@ -3,26 +3,42 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
 import { activateProfile, deactivateProfile } from "../../store/Modals";
-import { getPictures } from "../../store/profile";
+import { edit } from "../../store/session";
 import "./Profile.css";
 
 function Profile({}) {
   const dispatch = useDispatch();
   const profileState = useSelector((state) => state.modal.profile);
   const sessionUser = useSelector((state) => state.session.user);
+  const pictures = useSelector((state) => state.profile.pictures);
   const [userName, setUsername] = useState(sessionUser.username);
+  const [pictureId, setPictureId] = useState(sessionUser.ProfilePicture.id);
   const [profilePicture, setProfilePicture] = useState(
     sessionUser.ProfilePicture.imageLink
   );
   const onclick = () => {
     dispatch(deactivateProfile());
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const res = await dispatch(
+      edit(sessionUser.id, { username: userName, profilePictureId: pictureId })
+    );
+    dispatch(deactivateProfile());
   };
-  useEffect(() => {
-    dispatch(getPictures());
-  }, []);
+
+  // useEffect(() => {
+
+  // }, [profilePicture]);
+
+  const onPictureClick = (id) => {
+    if (pictureId) {
+      document.getElementById(pictureId).classList.remove("active");
+    }
+    document.getElementById(id).classList.add("active");
+    setPictureId(id);
+    setProfilePicture(pictures[id].imageLink);
+  };
   return (
     <Modal
       isOpen={profileState}
@@ -56,6 +72,26 @@ function Profile({}) {
               <button className="changeProfileBtn">Submit</button>
             </div>
           </form>
+        </div>
+        <div className="pictureShell">
+          {pictures &&
+            Object.values(pictures).map((picture, i) =>
+              i === pictureId - 1 ? (
+                <img
+                  className="selectPicture active"
+                  src={picture.imageLink}
+                  id={picture.id}
+                  onClick={() => onPictureClick(picture.id)}
+                ></img>
+              ) : (
+                <img
+                  className="selectPicture"
+                  src={picture.imageLink}
+                  id={picture.id}
+                  onClick={() => onPictureClick(picture.id)}
+                ></img>
+              )
+            )}
         </div>
       </div>
     </Modal>

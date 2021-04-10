@@ -109,3 +109,25 @@
   background-color: #66c0f4;
   color: white;
 }
+
+.pictureShell {
+  margin-top: 20px;
+  width: 85%;
+  background-color: rgba(23, 26, 33, 0.4);
+  padding-top: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 20px;
+  border-radius: 8px;
+}
+.selectPicture {
+  height: 90px;
+  width: 90px;
+  margin: 10px;
+  border: 5px solid #66c0f4;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.selectPicture.active {
+  border: 5px solid white;
+}

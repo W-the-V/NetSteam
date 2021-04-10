@@ -28,6 +28,7 @@ function Navigation({
 }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const pictures = useSelector((state) => state.profile.pictures);
 
   const onclickSearch = () => {
     if (!searchState) {
@@ -128,7 +129,7 @@ function Navigation({
                 onMouseEnter={() => profileHover()}
               >
                 <img
-                  src={sessionUser.ProfilePicture.imageLink}
+                  src={pictures[sessionUser.profilePictureId]?.imageLink}
                   className="profilePictureNav"
                 ></img>
                 <i className="fas fa-caret-down downArrow"></i>

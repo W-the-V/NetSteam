@@ -7,6 +7,7 @@ import Carousel from "../Carousel";
 import FocusModal from "../FocusModal";
 import Profile from "../Profile";
 import { getAllVideos } from "../../store/videos";
+import { getPictures } from "../../store/profile";
 
 function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   let videos = useSelector((state) => state.home.videos);
   useEffect(() => {
     dispatch(getAllVideos());
+    dispatch(getPictures());
   }, []);
   if (!sessionUser) {
     return <Redirect to="/" />;

@@ -49,7 +49,11 @@ router.post(
 router.get(
   "/profile",
   asyncHandler(async (req, res) => {
-    const pictures = await ProfilePicture.findAll();
+    let picturesArr = await ProfilePicture.findAll();
+    let pictures = {};
+    picturesArr.map((picture) => {
+      pictures[picture.id] = picture.dataValues;
+    });
     return res.json({ pictures });
   })
 );

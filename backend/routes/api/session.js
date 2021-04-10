@@ -48,6 +48,21 @@ router.post(
   })
 );
 
+router.post(
+  "/edit",
+  asyncHandler(async (req, res, next) => {
+    const { id, info } = req.body;
+    user = await User.findOne({
+      where: id,
+    });
+    user.username = info.username;
+    user.profilePictureId = info.profilePictureId;
+    await user.save();
+    console.log(user);
+    return res.json({ user });
+  })
+);
+
 // Log out
 router.delete("/", (_req, res) => {
   res.clearCookie("token");

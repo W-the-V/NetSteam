@@ -1,6 +1,6 @@
 import { fetch } from "./csrf.js";
 const GET_PICTURES = "pictures/get";
-const EDIT_PROFILE = "profile/edit";
+
 
 export const setPictures = (pictures) => {
   return {

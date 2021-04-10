@@ -26,6 +26,7 @@ const FocusModal = ({
   const focusId = useSelector((state) => state.modal.focus.id);
   let reviews = useSelector((state) => state.reviews);
   const userId = useSelector((state) => state.session.user.id);
+  const pictures = useSelector((state) => state.profile.pictures);
   let videos = useSelector((state) => state.home.videos);
   let videoOne = videos[focusId];
   let reviewOne = useSelector((state) => state.reviews);
@@ -106,7 +107,6 @@ const FocusModal = ({
     document
       .getElementById(`edit${commentId}`)
       ?.classList.add("commentInnerShell");
-    console.log(reviewOne[commentId]);
     setRecommend(reviewOne[commentId].recommended);
     setCommentText(reviewOne[commentId].body);
     setScore(reviewOne[commentId].score);
@@ -217,7 +217,7 @@ const FocusModal = ({
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
                         <img
-                          src={rev.User.ProfilePicture.imageLink}
+                          src={pictures[rev.User.profilePictureId].imageLink}
                           className="userProfileImg"
                         ></img>
                         <div className="commentUserInfo">
