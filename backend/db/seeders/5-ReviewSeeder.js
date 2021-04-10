@@ -28,7 +28,7 @@ module.exports = {
         "I've never tried this game before, I'm going to now!",
       ];
       for (let i = 1; i <= 20; i++) {
-        for (let j = 1; j <= 10; j++) {
+        for (let j = 1; j <= 20; j++) {
           let userId = i;
           let score = Math.round(Math.random());
           reviews.push({
@@ -36,7 +36,7 @@ module.exports = {
             recommended: score === 1,
             userId,
             body: textArr[Math.floor(Math.random() * 21)],
-            videoId: Math.ceil(Math.random() * 52),
+            videoId: Math.ceil(Math.random() * 55),
             createdAt: new Date(),
             updatedAt: new Date(),
           });

@@ -22,7 +22,7 @@ export const getAllVideos = () => async (dispatch) => {
   return res;
 };
 
-const initialState = { videos: {}, genres: {} };
+const initialState = { videos: {}, genres: [] };
 const videosReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {

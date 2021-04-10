@@ -39,14 +39,6 @@ function Navigation({
       setSearchState(false);
     }
   };
-  const onhoverSearch = () => {
-    if (
-      !document.querySelector(".searchBtnShell").classList.contains("active")
-    ) {
-      document.querySelector(".searchBtnShell").classList.add("active");
-      setSearchState(true);
-    }
-  };
   const login = () => {
     dispatch(deactivateSignUp());
     dispatch(activateLogin());
@@ -121,11 +113,7 @@ function Navigation({
           {sessionUser && (
             <div className="rightNavShell">
               <div className="searchBtnShell">
-                <div
-                  className="searchIcoShell"
-                  onClick={() => onclickSearch()}
-                  onMouseEnter={onhoverSearch}
-                >
+                <div className="searchIcoShell" onClick={() => onclickSearch()}>
                   <i className="fas fa-search searchBtnIcon"></i>
                 </div>
                 <input

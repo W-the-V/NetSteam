@@ -23,7 +23,6 @@ function Carousel({ title, focusId, setFocusId, videos }) {
   };
 
   function videoMap(videos) {
-    videos = Object.values(videos);
     let count = Math.ceil(videos.length / 5);
     let index = 0;
     let slideTotal = 0;
@@ -40,9 +39,7 @@ function Carousel({ title, focusId, setFocusId, videos }) {
             src={videos[slideTotal]?.imageURL}
             onClick={() => onClick2(videos[currentSlide]?.id)}
             onMouseEnter={
-              title === "Trending"
-                ? () => onClick1(videos[currentSlide]?.id)
-                : null
+              title === "Trending" ? () => onClick1(currentSlide) : null
             }
           ></img>
         );

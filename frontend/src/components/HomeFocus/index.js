@@ -11,7 +11,8 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   let videos = useSelector((state) => state.home.videos);
-  const [focusId, setFocusId] = useState("1");
+  videos = Object.values(videos).filter((video) => video.Reviews.length >= 10);
+  const [focusId, setFocusId] = useState(0);
   let videoOne = videos[focusId];
 
   const genreClick = (genre) => {
@@ -42,10 +43,10 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
     return returnObj;
   };
   let score = videoScore();
-  useEffect(() => {
-    videoOne = videos[focusId];
-    score = videoScore();
-  }, [focusId]);
+  // useEffect(() => {
+  //   videoOne = videos[focusId];
+  //   score = videoScore();
+  // }, [focusId]);
   const onClick2 = (id) => {
     dispatch(getVideoComments(id));
     dispatch(setFocusModal(id));
