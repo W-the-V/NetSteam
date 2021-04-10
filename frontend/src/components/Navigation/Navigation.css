@@ -170,3 +170,6 @@
   justify-content: flex-end;
   pointer-events: none;
 }
+.navButton:hover {
+  color: white;
+}

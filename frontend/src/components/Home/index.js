@@ -5,6 +5,7 @@ import "./Home.css";
 import HomeFocus from "../HomeFocus";
 import Carousel from "../Carousel";
 import FocusModal from "../FocusModal";
+import Profile from "../Profile";
 import { getAllVideos } from "../../store/videos";
 
 function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
@@ -20,6 +21,7 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   }
   return (
     <div className="homeOuterShell">
+      <Profile />
       <FocusModal
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

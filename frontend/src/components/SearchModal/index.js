@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 
-import { setFocusModal } from "../../store/Modals";
+import { setFocusModal, deactivateFocus } from "../../store/Modals";
 import { getVideoComments } from "../../store/reviews";
 import "./SearchModal.css";
 
@@ -23,6 +23,7 @@ function SearchModal({
     dispatch(getVideoComments(id));
   };
   const videoState = useSelector((state) => state.home.videos);
+  const focusState = useSelector((state) => state.modal.focus.status);
   const videos = Object.values(videoState);
   let [searchItems, setSearchItems] = useState([]);
   useEffect(() => {
@@ -31,6 +32,7 @@ function SearchModal({
     ) {
       document.querySelector(".searchBtnShell").classList.add("active");
     }
+    if (focusState) dispatch(deactivateFocus());
     let result = videos.filter(
       (video) =>
         video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

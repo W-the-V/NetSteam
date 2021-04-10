@@ -44,11 +44,13 @@ const CommentModal = ({
   };
   const onclickUp = () => {
     setRecommend(true);
+    setScore(1);
     document.querySelector(".addUp").classList = "ratingImageUp addUp active";
     document.querySelector(".addDown").classList = "ratingImageDown addDown";
   };
   const onclickDown = () => {
     setRecommend(false);
+    setScore(0);
     document.querySelector(".addUp").classList = "ratingImageUp addUp";
     document.querySelector(".addDown").classList =
       "ratingImageDown addDown active";
@@ -81,91 +83,6 @@ const CommentModal = ({
           >
             <i className="fas fa-thumbs-down"></i>
           </div>
-        </div>
-        <div className="scaleShell">
-          <div className="scaleText">How would you Rate this Trailer?</div>
-          <input
-            type="radio"
-            value={0}
-            name="rating"
-            className="ratingRad"
-            checked={score == 0}
-            onChange={(e) => setScore(e.target.value)}
-            required={true}
-          />
-          0
-          <input
-            type="radio"
-            value={1}
-            checked={score == 1}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          1
-          <input
-            type="radio"
-            value={2}
-            checked={score == 2}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          2
-          <input
-            type="radio"
-            value={3}
-            checked={score == 3}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          3
-          <input
-            type="radio"
-            value={4}
-            checked={score == 4}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          4
-          <input
-            type="radio"
-            value={5}
-            checked={score == 5}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          5
-          <input
-            type="radio"
-            value={6}
-            checked={score == 6}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          6
-          <input
-            type="radio"
-            value={7}
-            checked={score == 7}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          7
-          <input
-            type="radio"
-            value={8}
-            checked={score == 8}
-            name="rating"
-            className="ratingRad"
-            onChange={(e) => setScore(e.target.value)}
-          />
-          8
         </div>
         <textarea
           value={commentText}

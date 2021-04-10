@@ -31,11 +31,12 @@ const FocusModal = ({
   let reviewOne = useSelector((state) => state.reviews);
   const [recommend, setRecommend] = useState(true);
   const [commentText, setCommentText] = useState("");
-  const [score, setScore] = useState();
+  const [score, setScore] = useState(1);
   const [edit, setEdit] = useState(false);
   reviews = Object.values(reviews)
     .filter((review) => review.videoId === focusId)
     .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
+
   const genreClick = (genre) => {
     setEdit(false);
     dispatch(deactivateFocus());
@@ -68,38 +69,16 @@ const FocusModal = ({
       });
     }
     returnScore = returnScore / returnCount;
-    switch (Math.round(returnScore)) {
-      case 0:
-        returnScore = "Overwhelmingly Negative";
-        break;
-      case 1:
-        returnScore = "Very Negative";
-        break;
-      case 2:
-        returnScore = "Negative";
-        break;
-      case 3:
-        returnScore = "Mostly Negative";
-        break;
-      case 4:
-        returnScore = "Mixed";
-        break;
-      case 5:
-        returnScore = "Mostly Positive";
-        break;
-      case 6:
-        returnScore = "Positive";
-        break;
-      case 7:
-        returnScore = "Very Positive";
-        break;
-      case 8:
-        returnScore = "Overwhelmingly Positive";
-        break;
-      default:
-        returnScore = "No Reviews Yet";
-        break;
-    }
+    if (returnScore < 0.1) returnScore = "Overwhelmingly Negative";
+    else if (returnScore < 0.2) returnScore = "Very Negative";
+    else if (returnScore < 0.3) returnScore = "Negative";
+    else if (returnScore < 0.4) returnScore = "Mostly Negative";
+    else if (returnScore < 0.5) returnScore = "Mixed";
+    else if (returnScore < 0.6) returnScore = "Mostly Positive";
+    else if (returnScore < 0.7) returnScore = "Positive";
+    else if (returnScore < 0.8) returnScore = "Very Positive";
+    else if (returnScore >= 0.8) returnScore = "Overwhelmingly Positive";
+    else returnScore = "No Reviews Yet";
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
@@ -114,7 +93,7 @@ const FocusModal = ({
     else {
       setRecommend(true);
       setCommentText();
-      setScore();
+      setScore(1);
       dispatch(activateComment());
     }
   };
@@ -145,6 +124,7 @@ const FocusModal = ({
         contentLabel="Focus"
         className="focusInner"
         overlayClassName="focusOuter"
+        shouldReturnFocusAfterClose={false}
       >
         <div className="homeFocusShell">
           <div className="focusTitleBox">

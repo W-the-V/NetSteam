@@ -5,6 +5,7 @@ import modalReducer from "./Modals";
 import menuReducer from "./showMenu";
 import videosReducer from "./videos";
 import reviewReducer from "./reviews";
+import profileReducer from "./profile";
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   menu: menuReducer,
   home: videosReducer,
   reviews: reviewReducer,
+  profile: profileReducer,
 });
 
 let enhancer;

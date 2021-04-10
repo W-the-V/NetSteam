@@ -28,38 +28,16 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
       });
     }
     returnScore = returnScore / returnCount;
-    switch (Math.round(returnScore)) {
-      case 0:
-        returnScore = "Overwhelmingly Negative";
-        break;
-      case 1:
-        returnScore = "Very Negative";
-        break;
-      case 2:
-        returnScore = "Negative";
-        break;
-      case 3:
-        returnScore = "Mostly Negative";
-        break;
-      case 4:
-        returnScore = "Mixed";
-        break;
-      case 5:
-        returnScore = "Mostly Positive";
-        break;
-      case 6:
-        returnScore = "Positive";
-        break;
-      case 7:
-        returnScore = "Very Positive";
-        break;
-      case 8:
-        returnScore = "Overwhelmingly Positive";
-        break;
-      default:
-        returnScore = "No Reviews Yet";
-        break;
-    }
+    if (returnScore < 0.1) returnScore = "Overwhelmingly Negative";
+    else if (returnScore < 0.2) returnScore = "Very Negative";
+    else if (returnScore < 0.3) returnScore = "Negative";
+    else if (returnScore < 0.4) returnScore = "Mostly Negative";
+    else if (returnScore < 0.5) returnScore = "Mixed";
+    else if (returnScore < 0.6) returnScore = "Mostly Positive";
+    else if (returnScore < 0.7) returnScore = "Positive";
+    else if (returnScore < 0.8) returnScore = "Very Positive";
+    else if (returnScore >= 0.8) returnScore = "Overwhelmingly Positive";
+    else returnScore = "No Reviews Yet";
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };

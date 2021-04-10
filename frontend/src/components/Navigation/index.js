@@ -16,6 +16,7 @@ import {
 
 import { changeProfile, changeDeveloper } from "../../store/showMenu";
 import { getAllVideos } from "../../store/videos";
+
 import * as sessionActions from "../../store/session";
 
 function Navigation({
@@ -89,6 +90,7 @@ function Navigation({
       .classList.remove("hiddenComment");
     document.querySelector(".navButton").classList.add("active");
   };
+
   return (
     <>
       <div className="navOuterShell">
@@ -150,7 +152,12 @@ function Navigation({
         </div>
       </div>
       <div className="dropDownOuterMostShell">
-        <DropDown />
+        <DropDown
+          onclickSearch={onclickSearch}
+          setSearchTerm={setSearchTerm}
+          setSearchState={setSearchState}
+          searchState={searchState}
+        />
         <DeveloperButton />
       </div>
     </>
