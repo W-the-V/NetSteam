@@ -1,0 +1,133 @@
+.profileInner {
+  margin-top: 70px;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.28) 0px 8px 28px;
+}
+.profileOuter {
+  height: 100%;
+  width: 100vw;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileOuterShell {
+  margin-top: 20px;
+  height: 93%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1b2838;
+  border-radius: 8px;
+}
+.profileTitle {
+  margin-top: 10px;
+  font-size: 48px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+.profilePictureShell {
+  width: 90%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.userProfilePicture {
+  height: 200px;
+  width: 200px;
+  border-radius: 6px;
+}
+.profileCloseIco {
+  cursor: pointer;
+  color: #66c0f4;
+}
+.profileCloseIco:hover {
+  color: white;
+}
+.profileForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 50px;
+}
+.profileInputTextShell {
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+.profileInputText {
+  padding-left: 10px;
+  margin-left: 20px;
+  color: white;
+  background-color: #171a21;
+  display: flex;
+  cursor: text;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  border: none;
+  z-index: 1;
+  height: 30px;
+  outline: none;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.profileBtnShell {
+  margin-top: 90px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.chooseProfileBtn,
+.changeProfileBtn {
+  border: none;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #2a475e;
+  color: #66c0f4;
+  height: 30px;
+  font-size: 18px;
+}
+
+.chooseProfileBtn:hover,
+.changeProfileBtn:hover {
+  background-color: #66c0f4;
+  color: white;
+}
+
+.pictureShell {
+  margin-top: 20px;
+  width: 85%;
+  background-color: rgba(23, 26, 33, 0.4);
+  padding-top: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 20px;
+  border-radius: 8px;
+}
+.selectPicture {
+  height: 90px;
+  width: 90px;
+  margin: 10px;
+  border: 5px solid #66c0f4;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.selectPicture.active {
+  border: 5px solid white;
+}

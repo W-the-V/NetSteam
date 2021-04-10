@@ -14,21 +14,37 @@ import "./FocusModal.css";
 
 Modal.setAppElement(document.getElementById("root"));
 
-const FocusModal = () => {
+const FocusModal = ({
+  searchTerm,
+  setSearchTerm,
+  searchState,
+  setSearchState,
+}) => {
   const dispatch = useDispatch();
   const commentState = useSelector((state) => state.modal.comment);
   const focusState = useSelector((state) => state.modal.focus.status);
   const focusId = useSelector((state) => state.modal.focus.id);
   let reviews = useSelector((state) => state.reviews);
   const userId = useSelector((state) => state.session.user.id);
+  const pictures = useSelector((state) => state.profile.pictures);
   let videos = useSelector((state) => state.home.videos);
   let videoOne = videos[focusId];
+  let reviewOne = useSelector((state) => state.reviews);
+  const [recommend, setRecommend] = useState(true);
+  const [commentText, setCommentText] = useState("");
+  const [score, setScore] = useState(1);
   const [edit, setEdit] = useState(false);
-  reviews = Object.values(reviews).filter(
-    (review) => review.videoId === focusId
-  );
-  // .sort((a, b) => a.updatedAt < b.updatedAt);
+  reviews = Object.values(reviews)
+    .filter((review) => review.videoId === focusId)
+    .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
 
+  const genreClick = (genre) => {
+    setEdit(false);
+    dispatch(deactivateFocus());
+    setSearchTerm(genre);
+    setSearchState(true);
+  };
+  //dayjs npm package
   const getDate = (date) => {
     date = date.split("-");
     let day = date[2].split("");
@@ -54,42 +70,20 @@ const FocusModal = () => {
       });
     }
     returnScore = returnScore / returnCount;
-    switch (Math.round(returnScore)) {
-      case 0:
-        returnScore = "Overwhelmingly Negative";
-        break;
-      case 1:
-        returnScore = "Very Negative";
-        break;
-      case 2:
-        returnScore = "Negative";
-        break;
-      case 3:
-        returnScore = "Mostly Negative";
-        break;
-      case 4:
-        returnScore = "Mixed";
-        break;
-      case 5:
-        returnScore = "Mostly Positive";
-        break;
-      case 6:
-        returnScore = "Positive";
-        break;
-      case 7:
-        returnScore = "Very Positive";
-        break;
-      case 8:
-        returnScore = "Overwhelmingly Positive";
-        break;
-      default:
-        returnScore = "No Reviews Yet";
-        break;
-    }
+    if (returnScore < 0.1) returnScore = "Overwhelmingly Negative";
+    else if (returnScore < 0.2) returnScore = "Very Negative";
+    else if (returnScore < 0.3) returnScore = "Negative";
+    else if (returnScore < 0.4) returnScore = "Mostly Negative";
+    else if (returnScore < 0.5) returnScore = "Mixed";
+    else if (returnScore < 0.6) returnScore = "Mostly Positive";
+    else if (returnScore < 0.7) returnScore = "Positive";
+    else if (returnScore < 0.8) returnScore = "Very Positive";
+    else if (returnScore >= 0.8) returnScore = "Overwhelmingly Positive";
+    else returnScore = "No Reviews Yet";
     const returnObj = { score: returnScore, total: returnCount };
     return returnObj;
   };
-  let score = videoScore();
+  let totalScore = videoScore();
   const onclick = () => {
     setEdit(false);
     dispatch(deactivateFocus());
@@ -97,7 +91,12 @@ const FocusModal = () => {
   const onclick2 = () => {
     if (edit) return;
     if (commentState) dispatch(deactivateComment());
-    else dispatch(activateComment());
+    else {
+      setRecommend(true);
+      setCommentText();
+      setScore(1);
+      dispatch(activateComment());
+    }
   };
   const onclick3 = (commentId) => {
     if (edit) return;
@@ -108,6 +107,9 @@ const FocusModal = () => {
     document
       .getElementById(`edit${commentId}`)
       ?.classList.add("commentInnerShell");
+    setRecommend(reviewOne[commentId].recommended);
+    setCommentText(reviewOne[commentId].body);
+    setScore(reviewOne[commentId].score);
     setEdit(true);
   };
   const onclick4 = async (editId, userId) => {
@@ -122,10 +124,12 @@ const FocusModal = () => {
         contentLabel="Focus"
         className="focusInner"
         overlayClassName="focusOuter"
+        shouldReturnFocusAfterClose={false}
       >
         <div className="homeFocusShell">
           <div className="focusTitleBox">
             <div className="focusTitle">{videoOne?.title}</div>
+            <i class="fas fa-times focusCloseIco" onClick={onclick}></i>
           </div>
           <div className="focusInnerShell">
             <div className="videoOuterShell">
@@ -154,17 +158,20 @@ const FocusModal = () => {
                 </div>
                 <div className="reviewDataBox">
                   <div className="reviewData">
-                    {score?.score}
-                    {score?.score !== "No Reviews Yet" ? (
+                    {totalScore?.score}
+                    {totalScore?.score !== "No Reviews Yet" ? (
                       <div className="totalReviewText">
-                        ({score?.total} Reviews)
+                        ({totalScore?.total} Reviews)
                       </div>
                     ) : null}
                   </div>
                   <div className="reviewData">{videoOne?.releaseDate}</div>
                   <div className="reviewData">{videoOne?.developer}</div>
                   <div className="reviewData">{videoOne?.publisher}</div>
-                  <button className="genreButton">
+                  <button
+                    className="genreButton"
+                    onClick={() => genreClick(videoOne.Genre.type)}
+                  >
                     {videoOne?.Genre.type}
                   </button>
                 </div>
@@ -177,10 +184,10 @@ const FocusModal = () => {
             <div className="commentTopLeft">
               <div className="topText">Overall Reviews: </div>
               <div className="bottomText">
-                {score?.score}
-                {score?.score !== "No Reviews Yet" ? (
+                {totalScore?.score}
+                {totalScore?.score !== "No Reviews Yet" ? (
                   <div className="totalReviewText">
-                    ({score?.total} Reviews)
+                    ({totalScore?.total} Reviews)
                   </div>
                 ) : null}
               </div>
@@ -195,12 +202,24 @@ const FocusModal = () => {
                 </button>
               </div>
               <div className="commentLeftShell">
-                {commentState && <CommentModal />}
+                {commentState && (
+                  <CommentModal
+                    recommend={recommend}
+                    setRecommend={setRecommend}
+                    commentText={commentText}
+                    setCommentText={setCommentText}
+                    score={score}
+                    setScore={setScore}
+                  />
+                )}
                 {reviews.map((rev) => (
                   <div className="commentOuterShell">
                     <div className="commentInnerShell" id={rev.id}>
                       <div className="commentInnerLeft">
-                        <div className="userProfileImg"></div>
+                        <img
+                          src={pictures[rev.User.profilePictureId].imageLink}
+                          className="userProfileImg"
+                        ></img>
                         <div className="commentUserInfo">
                           <div className="commentUserName">
                             {rev?.User?.username}
@@ -263,6 +282,12 @@ const FocusModal = () => {
                       prevScore={rev?.score}
                       edit={edit}
                       setEdit={setEdit}
+                      recommend={recommend}
+                      setRecommend={setRecommend}
+                      commentText={commentText}
+                      setCommentText={setCommentText}
+                      score={score}
+                      setScore={setScore}
                     />
                   </div>
                 ))}

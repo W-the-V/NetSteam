@@ -2,6 +2,7 @@ import { fetch } from "./csrf.js";
 
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
+// const EDIT_USER = "session/editUser";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,11 +13,26 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
+// const editUser = (user) => ({
+//   type: EDIT_USER,
+//   payload: user,
+// });
+
 export const login = ({ credential, password }) => async (dispatch) => {
   const res = await fetch("/api/session", {
     method: "POST",
     body: JSON.stringify({ credential, password }),
   });
+  dispatch(setUser(res.data.user));
+  return res;
+};
+
+export const edit = (id, info) => async (dispatch) => {
+  const res = await fetch("/api/session/edit", {
+    method: "POST",
+    body: JSON.stringify({ id, info }),
+  });
+  console.log(res.data.user);
   dispatch(setUser(res.data.user));
   return res;
 };

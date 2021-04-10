@@ -5,23 +5,37 @@ import "./Home.css";
 import HomeFocus from "../HomeFocus";
 import Carousel from "../Carousel";
 import FocusModal from "../FocusModal";
+import Profile from "../Profile";
 import { getAllVideos } from "../../store/videos";
+import { getPictures } from "../../store/profile";
 
-function Home() {
+function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [focusId, setFocusId] = useState("1");
   let videos = useSelector((state) => state.home.videos);
   useEffect(() => {
     dispatch(getAllVideos());
+    dispatch(getPictures());
   }, []);
   if (!sessionUser) {
     return <Redirect to="/" />;
   }
   return (
     <div className="homeOuterShell">
-      <FocusModal />
-      <HomeFocus />
+      <Profile />
+      <FocusModal
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        searchState={searchState}
+        setSearchState={setSearchState}
+      />
+      <HomeFocus
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        searchState={searchState}
+        setSearchState={setSearchState}
+      />
       <Carousel
         title={"New"}
         videos={videos}

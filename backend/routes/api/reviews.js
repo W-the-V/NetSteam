@@ -1,7 +1,13 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 
-const { User, Video, Review, Genre } = require("../../db/models");
+const {
+  User,
+  Video,
+  Review,
+  Genre,
+  ProfilePicture,
+} = require("../../db/models");
 
 const router = express.Router();
 
@@ -10,7 +16,13 @@ router.get(
   asyncHandler(async (req, res, next) => {
     let reviews = await Review.findAll({
       where: { videoId: req.params.videoId },
-      include: User,
+      include: [
+        {
+          model: User,
+          include: ProfilePicture,
+        },
+      ],
+      order: [["createdAt", "DESC"]],
     });
     let reviewObj = {};
     reviews = reviews.map((review) => {
@@ -20,31 +32,33 @@ router.get(
   })
 );
 
-router.post(
-  "/video/:videoId",
-  asyncHandler(async (req, res, next) => {
-    const videoId = req.params.videoId;
-    const { recommend, score, commentText, userId } = req.body;
-    const review = await Review.create({
-      score,
-      recommended: recommend,
-      userId,
-      body: commentText,
-      videoId,
+router.post("/video/:videoId", async (req, res) => {
+  const videoId = req.params.videoId;
+  const { recommend, score, commentText, userId } = req.body;
+  console.log(userId);
+  const review = await Review.create({
+    score,
+    recommended: recommend,
+    userId,
+    body: commentText,
+    videoId,
+  });
+  if (review) {
+    let returnReview = await Review.findOne({
+      where: {
+        id: review.dataValues.id,
+      },
+      include: [
+        {
+          model: User,
+          include: ProfilePicture,
+        },
+      ],
     });
-    if (review) {
-      // let reviews = await Review.findAll({
-      //   where: { videoId: req.params.videoId },
-      //   include: User,
-      // });
-      // let reviewObj = {};
-      // reviews = reviews.map((review) => {
-      //   reviewObj[review.dataValues.id] = review.dataValues;
-      // });
-      return res.json({ review });
-    }
-  })
-);
+    returnReview = returnReview.dataValues;
+    if (returnReview) return res.json({ returnReview });
+  }
+});
 
 router.post(
   "/:reviewId",
@@ -61,12 +75,18 @@ router.post(
 
     let reviews = await Review.findAll({
       where: { videoId },
-      include: User,
+      include: [
+        {
+          model: User,
+          include: ProfilePicture,
+        },
+      ],
     });
     let reviewObj = {};
     reviews = reviews.map((review) => {
       reviewObj[review.dataValues.id] = review.dataValues;
     });
+
     return res.json({ reviewObj });
   })
 );

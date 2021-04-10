@@ -9,13 +9,21 @@ import Home from "./components/Home";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchState, setSearchState] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation
+        isLoaded={isLoaded}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        searchState={searchState}
+        setSearchState={setSearchState}
+      />
       <LoginModal />
       {isLoaded && (
         <Switch>
@@ -23,7 +31,12 @@ function App() {
             <Splash />
           </Route>
           <Route path="/home">
-            <Home />
+            <Home
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              searchState={searchState}
+              setSearchState={setSearchState}
+            />
           </Route>
         </Switch>
       )}

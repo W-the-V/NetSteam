@@ -28,7 +28,7 @@
   margin-left: -50vw;
   margin-right: -50vw;
   outline: none;
-  z-index: 5;
+  z-index: 2;
 }
 .commentSectionShell {
   margin-top: 25px;
@@ -246,4 +246,13 @@
 }
 .hiddenComment {
   display: none;
+}
+.focusCloseIco {
+  color: #66c0f4;
+  cursor: pointer;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.focusCloseIco:hover {
+  color: white;
 }

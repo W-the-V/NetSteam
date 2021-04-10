@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const { handleValidationErrors } = require("../../utils/validation");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Video } = require("../../db/models");
+const { User, Video, ProfilePicture } = require("../../db/models");
 
 const router = express.Router();
 
@@ -43,6 +43,18 @@ router.post(
       user,
       videoObj,
     });
+  })
+);
+
+router.get(
+  "/profile",
+  asyncHandler(async (req, res) => {
+    let picturesArr = await ProfilePicture.findAll();
+    let pictures = {};
+    picturesArr.map((picture) => {
+      pictures[picture.id] = picture.dataValues;
+    });
+    return res.json({ pictures });
   })
 );
 

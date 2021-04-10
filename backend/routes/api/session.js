@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const { handleValidationErrors } = require("../../utils/validation");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { User, Video } = require("../../db/models");
+const { User, Video, ProfilePicture } = require("../../db/models");
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.post(
   validateLogin,
   asyncHandler(async (req, res, next) => {
     const { credential, password } = req.body;
-    const user = await User.login({ credential, password });
+    let user = await User.login({ credential, password });
 
     if (!user) {
       const err = new Error("Login failed");
@@ -34,12 +34,31 @@ router.post(
       err.errors = ["The provided credentials were invalid."];
       return next(err);
     }
-
+    oldUser = user;
+    user = await User.findOne({
+      where: { id: user.id },
+      include: ProfilePicture,
+    });
+    user["email"] = oldUser.email;
     await setTokenCookie(res, user);
-    
+
     return res.json({
       user,
     });
+  })
+);
+
+router.post(
+  "/edit",
+  asyncHandler(async (req, res, next) => {
+    const { id, info } = req.body;
+    user = await User.findOne({
+      where: id,
+    });
+    user.username = info.username;
+    user.profilePictureId = info.profilePictureId;
+    await user.save();
+    return res.json({ user });
   })
 );
 
@@ -50,13 +69,18 @@ router.delete("/", (_req, res) => {
 });
 
 // Restore session user
-router.get("/", restoreUser, (req, res) => {
-  const { user } = req;
-  if (user) {
-    return res.json({
-      user: user.toSafeObject(),
-    });
-  } else return res.json({});
-});
+router.get(
+  "/",
+  restoreUser,
+  asyncHandler(async (req, res, next) => {
+    let { user } = req;
+    if (user) {
+      user = user.toSafeObject();
+      return res.json({
+        user,
+      });
+    } else return res.json({});
+  })
+);
 
 module.exports = router;

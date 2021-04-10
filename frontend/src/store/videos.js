@@ -18,7 +18,6 @@ export const getAllVideos = () => async (dispatch) => {
   let res = await fetch("/api/home");
   res = await res.json();
   dispatch(setVideos(res.videoObj));
-  console.log(res.genres);
   dispatch(setGenres(res.genres));
   return res;
 };

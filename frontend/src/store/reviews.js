@@ -38,7 +38,7 @@ export const postComment = (
     method: "POST",
     body: JSON.stringify({ recommend, score, commentText, userId }),
   });
-  dispatch(addReview(res.data.review));
+  dispatch(addReview(res.data.returnReview));
   return res.data.review;
 };
 
