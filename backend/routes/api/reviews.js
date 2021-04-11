@@ -24,18 +24,26 @@ router.get(
       ],
       order: [["createdAt", "DESC"]],
     });
-    let reviewObj = {};
-    reviews = reviews.map((review) => {
+    let reviewCounts = await Promise.all(
+      reviews.map(async (review) => {
+        const total = await Review.count({
+          where: { userId: review.dataValues.userId },
+        });
+        return await total;
+      })
+    );
+    let reviewObj = await {};
+    reviews = await reviews.map(async (review, i) => {
+      review.dataValues["totalCount"] = reviewCounts[i];
       reviewObj[review.dataValues.id] = review.dataValues;
     });
-    return res.json({ reviewObj });
+    return await res.json({ reviewObj });
   })
 );
 
 router.post("/video/:videoId", async (req, res) => {
   const videoId = req.params.videoId;
   const { recommend, score, commentText, userId } = req.body;
-  console.log(userId);
   const review = await Review.create({
     score,
     recommended: recommend,

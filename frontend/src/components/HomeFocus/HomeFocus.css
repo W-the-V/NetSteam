@@ -48,6 +48,9 @@
   min-width: 350px;
   margin-left: 20px;
 }
+iframe {
+  border-radius: 6px;
+}
 .gameImg {
   width: 100%;
   max-height: 200px;
@@ -57,7 +60,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 18px;
-  height: 90px;
+  height: 105px;
   overflow: hidden;
 }
 .reviewOuterShell {

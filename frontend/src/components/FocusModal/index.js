@@ -229,7 +229,7 @@ const FocusModal = ({
                           <div className="commentUserName">
                             {rev?.User?.username}
                           </div>
-                          <div className="userTotal">1 comment</div>
+                          <div className="userTotal">{`${rev?.totalCount} reviews`}</div>
                         </div>
                       </div>
                       <div className="commentInnerRight">
