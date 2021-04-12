@@ -32,6 +32,9 @@ export const edit = (id, info, username) => async (dispatch) => {
     method: "POST",
     body: JSON.stringify({ id, info, username }),
   });
+  if (res.data.errors) {
+    return res.data;
+  }
   dispatch(setUser(res.data.user));
   return res;
 };

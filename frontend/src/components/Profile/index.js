@@ -12,13 +12,18 @@ function Profile({}) {
   const sessionUser = useSelector((state) => state.session.user);
   const pictures = useSelector((state) => state.profile.pictures);
   const [userName, setUsername] = useState(sessionUser.username);
+  const [confirmUserName, setConfirmUserName] = useState(sessionUser.username);
   const [pictureId, setPictureId] = useState();
   const [profilePicture, setProfilePicture] = useState();
+  const [errors, setErrors] = useState();
   const onclick = () => {
     dispatch(deactivateProfile());
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (userName !== confirmUserName) {
+      return setErrors("Usernames must match");
+    }
     const res = await dispatch(
       edit(
         sessionUser.id,
@@ -26,7 +31,12 @@ function Profile({}) {
         sessionUser.username
       )
     );
+    if (await res.errors) {
+      return setErrors(res.errors);
+    }
+    setErrors("");
     dispatch(deactivateProfile());
+    return res;
   };
 
   useEffect(() => {
@@ -54,7 +64,7 @@ function Profile({}) {
       <div className="profileOuterShell">
         <div className="profileTitle">
           <div className="profileTitleInner">Edit Profile</div>
-          <i class="fas fa-times profileCloseIco" onClick={onclick}></i>
+          <i className="fas fa-times profileCloseIco" onClick={onclick}></i>
         </div>
         <div className="profilePictureShell">
           <img src={profilePicture} className="userProfilePicture"></img>
@@ -65,17 +75,27 @@ function Profile({}) {
                 type="text"
                 value={userName}
                 className="profileInputText"
+                maxLength="30"
                 onChange={(e) => setUsername(e.target.value)}
               ></input>
             </div>
+            <div className="profileInputTextShell">
+              <div className="profileInputTextLabel"> Confirm Username : </div>
+              <input
+                type="text"
+                value={confirmUserName}
+                maxLength="30"
+                className="profileInputText"
+                onChange={(e) => setConfirmUserName(e.target.value)}
+              ></input>
+            </div>
             <div className="profileBtnShell">
-              <button className="chooseProfileBtn">
-                Change Profile Picture
-              </button>
+              {errors && <div className="profileBtnText">{errors}</div>}
               <button className="changeProfileBtn">Submit</button>
             </div>
           </form>
         </div>
+        <div className="chooseTitle">Select Profile Picture</div>
         <div className="pictureShell">
           {pictures &&
             Object.values(pictures).map((picture, i) =>

@@ -13,7 +13,7 @@
   margin-top: 10px;
 }
 .addUp {
-  margin-left: 80px;
+  margin-left: 50px;
   cursor: pointer;
 }
 .addUp.active {
@@ -50,9 +50,9 @@
   width: 90%;
   margin-top: 20px;
   overflow-y: scroll;
-  height: 90px;
+  height: 110px;
   resize: none;
-  font-size: 18px;
+  font-size: 20px;
   outline: none;
   background-color: #2a475e;
   color: white;
@@ -61,9 +61,9 @@
 }
 .commentSubmit {
   margin-top: 10px;
-  height: 30px;
-  width: 70px;
-  font-size: 20px;
+  height: 40px;
+  width: 80px;
+  font-size: 30px;
   background-color: #2a475e;
   color: #66c0f4;
   border: none;

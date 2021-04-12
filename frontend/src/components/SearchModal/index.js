@@ -64,7 +64,7 @@ function SearchModal({
           ) : (
             <div className="resultsText">{`0 Results for "${searchTerm}"`}</div>
           )}
-          <i class="fas fa-times searchCloseIco" onClick={onclick}></i>
+          <i className="fas fa-times searchCloseIco" onClick={onclick}></i>
         </div>
         <div className="resultsShell">
           {searchItems?.map((item) => (

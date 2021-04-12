@@ -139,8 +139,9 @@
   font-size: 14px;
 }
 .ratingImageUp {
-  height: 50px;
-  width: 50px;
+  margin-top: 5px;
+  height: 60px;
+  width: 60px;
   background-color: #2a475e;
   margin-right: 10px;
   display: flex;
@@ -151,8 +152,9 @@
   border-radius: 8px;
 }
 .ratingImageDown {
-  height: 50px;
-  width: 50px;
+  margin-top: 5px;
+  height: 60px;
+  width: 60px;
   background-color: #613236;
   margin-right: 10px;
   display: flex;
@@ -182,7 +184,7 @@
   overflow: hidden;
 }
 .ratingText {
-  font-size: 20px;
+  font-size: 26px;
   margin-bottom: 10px;
 }
 .commentDate {
@@ -190,7 +192,7 @@
   margin-left: 20px;
 }
 .commentText {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .commentRightShell {
   width: 95%;
@@ -199,7 +201,7 @@
   height: 900px;
 }
 #focusModalAboutText {
-  height: 100px;
+  height: 125px;
 }
 .commentBtn {
   height: 34px;
@@ -237,7 +239,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .commentInnerShell {
   width: 100%;

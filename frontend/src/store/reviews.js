@@ -38,7 +38,7 @@ export const postComment = (
     method: "POST",
     body: JSON.stringify({ recommend, score, commentText, userId }),
   });
-  dispatch(addReview(res.data.returnReview));
+  dispatch(setReviews(res.data.reviewObj));
   return res.data.review;
 };
 
@@ -63,6 +63,7 @@ export const deleteComment = (editId, userId) => async (dispatch) => {
     body: JSON.stringify({ userId }),
   });
   dispatch(deleteReview(res.data.reviewId));
+  dispatch(setReviews(res.data.reviewObj));
   return res;
 };
 

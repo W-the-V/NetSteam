@@ -67,7 +67,7 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
               controls={true}
               volume={0.5}
               pip={false}
-              width="100%"
+              width="94%"
               height="100%"
               url={videoOne?.embedURL}
             />
