@@ -11,7 +11,7 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   let videos = useSelector((state) => state.home.videos);
-  videos = Object.values(videos).filter((video) => video.Reviews.length >= 10);
+  videos = Object.values(videos).filter((video) => video.Reviews.length >= 15);
   const [focusId, setFocusId] = useState(0);
   let videoOne = videos[focusId];
 
