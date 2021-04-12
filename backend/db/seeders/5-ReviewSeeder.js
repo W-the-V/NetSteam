@@ -34,7 +34,7 @@ module.exports = {
         "Let's watch a different trailer instead",
       ];
       for (let i = 1; i <= 20; i++) {
-        let max = Math.floor(Math.random() * 40);
+        let max = Math.floor(Math.random() * 40 - Math.random() * 20);
         for (let j = 1; j <= max; j++) {
           let userId = i;
           let score = Math.round(Math.random());
