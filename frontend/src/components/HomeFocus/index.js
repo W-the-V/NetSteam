@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Carousel from "../Carousel";
@@ -73,7 +73,11 @@ function HomeFocus({ searchTerm, setSearchTerm, searchState, setSearchState }) {
             />
           </div>
           <div className="focusAboutShell">
-            <img className="gameImg" src={videoOne?.imageURL}></img>
+            <img
+              className="gameImg"
+              src={videoOne?.imageURL}
+              alt={"focus"}
+            ></img>
             <div className="aboutVideoText">{videoOne?.about}</div>
             <div className="reviewOuterShell">
               <div className="reviewTitleBox">

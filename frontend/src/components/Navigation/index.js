@@ -14,9 +14,6 @@ import {
   deactivateFocus,
 } from "../../store/Modals";
 
-import { changeProfile, changeDeveloper } from "../../store/showMenu";
-import { getAllVideos } from "../../store/videos";
-
 import * as sessionActions from "../../store/session";
 
 function Navigation({
@@ -44,7 +41,7 @@ function Navigation({
     dispatch(activateLogin());
   };
   const demoLogin = async () => {
-    const res = await dispatch(
+    await dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",

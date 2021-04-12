@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LoginModal from "./components/LoginModal";
@@ -30,13 +31,16 @@ function App() {
           <Route exact path="/">
             <Splash />
           </Route>
-          <Route path="/home">
+          <Route exact path="/home">
             <Home
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
               searchState={searchState}
               setSearchState={setSearchState}
             />
+          </Route>
+          <Route>
+            <Redirect to="/"></Redirect>
           </Route>
         </Switch>
       )}

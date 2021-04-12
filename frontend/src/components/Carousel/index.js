@@ -34,6 +34,7 @@ function Carousel({ title, focusId, setFocusId, videos }) {
         const currentSlide = slideTotal;
         slides.push(
           <img
+            key={currentSlide}
             className="slide"
             alt={`slide${slideCount}`}
             src={videos[slideTotal]?.imageURL}
@@ -47,7 +48,7 @@ function Carousel({ title, focusId, setFocusId, videos }) {
         slideTotal++;
       }
       returnArr.push(
-        <Slide className="carouselSlide" index={index}>
+        <Slide className="carouselSlide" index={index} key={index}>
           {slides}
         </Slide>
       );
