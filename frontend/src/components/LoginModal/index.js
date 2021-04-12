@@ -33,7 +33,7 @@ const LoginModal = () => {
     return res;
   };
   const demoLogin = async () => {
-    let res = await dispatch(
+    await dispatch(
       sessionActions.login({
         credential: "demo@demo.com",
         password: "password",

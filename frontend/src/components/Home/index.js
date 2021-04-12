@@ -40,6 +40,7 @@ function Home({ searchTerm, setSearchTerm, searchState, setSearchState }) {
       {genres &&
         genres?.map((genre) => (
           <Carousel
+            key={genre?.id}
             title={genre?.type}
             videos={Object.values(videos).filter(
               (video) => video.genreId === genre?.id

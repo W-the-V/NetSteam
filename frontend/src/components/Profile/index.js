@@ -101,6 +101,7 @@ function Profile({}) {
             Object.values(pictures).map((picture, i) =>
               i === pictureId - 1 ? (
                 <img
+                  key={i}
                   className="selectPicture active"
                   src={picture.imageLink}
                   id={picture.id}
@@ -108,6 +109,7 @@ function Profile({}) {
                 ></img>
               ) : (
                 <img
+                  key={i}
                   className="selectPicture"
                   src={picture.imageLink}
                   id={picture.id}
