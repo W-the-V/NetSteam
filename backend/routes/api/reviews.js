@@ -52,19 +52,30 @@ router.post("/video/:videoId", async (req, res) => {
     videoId,
   });
   if (review) {
-    let returnReview = await Review.findOne({
-      where: {
-        id: review.dataValues.id,
-      },
+    let reviews = await Review.findAll({
+      where: { videoId },
       include: [
         {
           model: User,
           include: ProfilePicture,
         },
       ],
+      order: [["createdAt", "DESC"]],
     });
-    returnReview = returnReview.dataValues;
-    if (returnReview) return res.json({ returnReview });
+    let reviewCounts = await Promise.all(
+      reviews.map(async (review) => {
+        const total = await Review.count({
+          where: { userId: review.dataValues.userId },
+        });
+        return await total;
+      })
+    );
+    let reviewObj = await {};
+    reviews = await reviews.map(async (review, i) => {
+      review.dataValues["totalCount"] = reviewCounts[i];
+      reviewObj[review.dataValues.id] = review.dataValues;
+    });
+    return await res.json({ reviewObj });
   }
 });
 
@@ -89,13 +100,22 @@ router.post(
           include: ProfilePicture,
         },
       ],
+      order: [["createdAt", "DESC"]],
     });
-    let reviewObj = {};
-    reviews = reviews.map((review) => {
+    let reviewCounts = await Promise.all(
+      reviews.map(async (review) => {
+        const total = await Review.count({
+          where: { userId: review.dataValues.userId },
+        });
+        return await total;
+      })
+    );
+    let reviewObj = await {};
+    reviews = await reviews.map(async (review, i) => {
+      review.dataValues["totalCount"] = reviewCounts[i];
       reviewObj[review.dataValues.id] = review.dataValues;
     });
-
-    return res.json({ reviewObj });
+    return await res.json({ reviewObj });
   })
 );
 
@@ -105,11 +125,34 @@ router.delete(
     const reviewId = req.params.reviewId;
     const { userId } = req.body;
     const review = await Review.findByPk(reviewId);
+    const videoId = review.videoId;
     if (userId !== review.userId) return;
 
     await review.destroy();
-
-    return res.json({ reviewId });
+    let reviews = await Review.findAll({
+      where: { videoId },
+      include: [
+        {
+          model: User,
+          include: ProfilePicture,
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+    let reviewCounts = await Promise.all(
+      reviews.map(async (review) => {
+        const total = await Review.count({
+          where: { userId: review.dataValues.userId },
+        });
+        return await total;
+      })
+    );
+    let reviewObj = await {};
+    reviews = await reviews.map(async (review, i) => {
+      review.dataValues["totalCount"] = reviewCounts[i];
+      reviewObj[review.dataValues.id] = review.dataValues;
+    });
+    return await res.json({ reviewObj, reviewId });
   })
 );
 module.exports = router;

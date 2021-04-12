@@ -129,7 +129,7 @@ const FocusModal = ({
         <div className="homeFocusShell">
           <div className="focusTitleBox">
             <div className="focusTitle">{videoOne?.title}</div>
-            <i class="fas fa-times focusCloseIco" onClick={onclick}></i>
+            <i className="fas fa-times focusCloseIco" onClick={onclick}></i>
           </div>
           <div className="focusInnerShell">
             <div className="videoOuterShell">
@@ -202,7 +202,7 @@ const FocusModal = ({
               <div className="bottomLeftTitle">
                 <div>Reviews (sorted by: Most Recent)</div>
                 <button className="commentBtn" onClick={onclick2}>
-                  Create Comment
+                  Create Review
                 </button>
               </div>
               <div className="commentLeftShell">

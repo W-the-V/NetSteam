@@ -11,7 +11,7 @@ module.exports = {
           updatedAt: new Date(),
         });
       }
-      for (let i = 16; i <= 20; i++) {
+      for (let i = 16; i <= 25; i++) {
         toReturn.push({
           imageLink: `https://netsteambucket.s3.amazonaws.com/pp${i}.jpg`,
           createdAt: new Date(),

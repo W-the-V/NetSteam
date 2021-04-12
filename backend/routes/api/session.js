@@ -61,6 +61,12 @@ router.post(
   "/edit",
   asyncHandler(async (req, res, next) => {
     const { id, info, username } = req.body;
+    if (info.username.length < 5) {
+      return res.json({ errors: "Username must be more than 4 characters" });
+    }
+    if (info.username.includes("@")) {
+      return res.json({ errors: "Username cannot be an email" });
+    }
     user = await User.findOne({
       where: id,
     });
