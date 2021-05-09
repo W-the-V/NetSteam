@@ -15,6 +15,13 @@
   Technologies used: JavaScript, React.js, Redux.js, Sequelize, Express, PostgreSQL, Html-5, Css-3, 
   </p>
 </p>
-
-
+<h1>Features </h1>
+User authentication
+Dynamic search feature that can search by title or genre, all genre buttons open search with that genre no matter where they are clicked from
+Videos sorted by genre
+live updating review scores for all videos
+"trending" list that updates header data on hover
+all videos playable
+Create, read, update, delete reviews, live updating review count and profile picture image beside all reviews (without refresh)
+live updating profile picture / username change
 
