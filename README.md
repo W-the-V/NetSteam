@@ -17,11 +17,18 @@
 </p>
 <h1>Features </h1>
 User authentication
+<br>
 Dynamic search feature that can search by title or genre, all genre buttons open search with that genre no matter where they are clicked from
+<br>
 Videos sorted by genre
-live updating review scores for all videos
-"trending" list that updates header data on hover
-all videos playable
+<br>
+Live updating review scores for all videos
+<br>
+"Trending" list that updates header data on hover
+<br>
+All videos playable
+<br>
 Create, read, update, delete reviews, live updating review count and profile picture image beside all reviews (without refresh)
-live updating profile picture / username change
+<br>
+Live updating profile picture / username change
 
